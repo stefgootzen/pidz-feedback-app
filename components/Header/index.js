@@ -1,22 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import colors from '../../constants/Colors';
+import { Colors, Spacing, Typography } from '../../styles';
 
 const Title = styled.Text`
-  font-size: 20px;
+  ${Typography.headerText};
   margin-bottom: 10px;
-  font-weight: 500;
 `;
 
 const Wrapper = styled.View`
+  ${Spacing.sectionPadding};
   padding-top: 40px;
   padding-bottom: 20px;
 `;
 
 const Line = styled.View`
   width: 30px;
-  border-bottom-color: ${colors.tint};
+  border-bottom-color: ${Colors.tint};
   border-bottom-width: 2px;
 `;
 
