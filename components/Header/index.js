@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import colors from '../../constants/Colors';
 
 const Title = styled.Text`
   font-size: 20px;
@@ -15,7 +16,7 @@ const Wrapper = styled.View`
 
 const Line = styled.View`
   width: 30px;
-  border-bottom-color: black;
+  border-bottom-color: ${colors.tint};
   border-bottom-width: 2px;
 `;
 
