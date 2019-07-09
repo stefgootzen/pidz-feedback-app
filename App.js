@@ -1,17 +1,18 @@
-import {createStackNavigator, createAppContainer} from 'react-navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Feedback from './screens/Feedback';
 import Selection from './screens/Selection';
 
 const MainNavigator = createStackNavigator({
   Feedback: {
     screen: Feedback,
-    headerMode: 'screen',
   },
-  Selection: {screen: Selection},
+  Selection: {
+    screen: Selection,
+  },
 },
-  {
-    initialRouteName: 'Selection',
-  });
+{
+  initialRouteName: 'Selection',
+});
 
 const App = createAppContainer(MainNavigator);
 

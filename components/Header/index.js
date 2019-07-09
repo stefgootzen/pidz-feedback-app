@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { View, Text } from 'react-native';
 
 const Title = styled.Text`
   font-size: 20px;
@@ -20,10 +20,14 @@ const Line = styled.View`
 `;
 
 const Header = ({ children }) => (
-<Wrapper>
+  <Wrapper>
     <Title>{ children }</Title>
     <Line />
-</Wrapper>
+  </Wrapper>
 );
+
+Header.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Header;
