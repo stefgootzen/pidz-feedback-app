@@ -9,6 +9,7 @@ const Title = styled.Text`
 `;
 
 const Wrapper = styled.View`
+  background-color: ${Colors.background};
   ${Spacing.sectionPadding};
   padding-top: 40px;
   padding-bottom: 20px;

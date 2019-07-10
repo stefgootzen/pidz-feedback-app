@@ -20,6 +20,13 @@ export const bodyText = {
   lineHeight: 19,
 };
 
+export const userCardText = {
+  color: Colors.darkText,
+  fontSize: smallFontSize,
+  lineHeight: 19,
+  fontWeight: 'bold',
+};
+
 export const headerText = {
   color: Colors.darkText,
   fontSize: headerFontSize,
