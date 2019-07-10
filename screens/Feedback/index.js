@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { ButtonGroup } from 'react-native-elements';
+import { Button, ButtonGroup } from 'react-native-elements';
 import { Formik } from 'formik';
 import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
@@ -12,6 +12,10 @@ import { setSuitability } from '../../actions/formActions';
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
   background-color: ${Colors.background};
+  height: 100%;
+`;
+
+const FullHeightView = styled.View`
   height: 100%;
 `;
 
@@ -25,14 +29,18 @@ const StyledTextInput = styled.TextInput`
   border-radius: 3px;
 `;
 
-// const StyledButton = styled(Button).attrs({
-//   buttonStyle: {
-//     backgroundColor: Colors.tint,
-//   },
-//   textStyle: {
-//     color: 'white',
-//   },
-// })``;
+const StyledButton = styled(Button).attrs({
+  containerStyle: {
+    marginTop: 'auto',
+    marginBottom: Spacing.small,
+  },
+  buttonStyle: {
+    backgroundColor: Colors.tint,
+  },
+  textStyle: {
+    color: 'white',
+  },
+})``;
 
 const StyledButtonGroup = styled(ButtonGroup).attrs({
   buttonStyle: {
@@ -77,7 +85,7 @@ const Feedback = ({ setSuitability, navigation, subjectName }) => (
       }}
     >
       {props => (
-        <View>
+        <FullHeightView>
           <BodyText>{`Vind je ${subjectName} geschikt om op deze afdeling te werken?`}</BodyText>
           <StyledButtonGroup
             onPress={value => props.setFieldValue('suitable', value)}
@@ -96,12 +104,11 @@ const Feedback = ({ setSuitability, navigation, subjectName }) => (
             value={props.values.clarification}
             underlineColorAndroid={Colors.darkGrey}
           />
-          <Button
+          <StyledButton
             onPress={props.handleSubmit}
             title="Submit"
-            color={Colors.tint}
           />
-        </View>
+        </FullHeightView>
       )}
     </Formik>
   </Wrapper>
