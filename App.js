@@ -1,19 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import Feedback from './screens/Feedback';
+import Selection from './screens/Selection';
+import fromRight from './utils/transitionConfig';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const MainNavigator = createStackNavigator({
+  Feedback: {
+    screen: Feedback,
   },
+  Selection: {
+    screen: Selection,
+  },
+},
+{
+  initialRouteName: 'Selection',
+  transitionConfig: () => fromRight(),
 });
+
+const AppContainer = createAppContainer(MainNavigator);
+
+const App = () => (
+  <AppContainer />
+);
+
+export default App;
