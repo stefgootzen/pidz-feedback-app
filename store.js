@@ -1,13 +1,13 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import rootReducer from './reducers/rootReducer';
 
-import dummyReducers from './reducers/dummyReducer';
+const middlewares = [thunk, logger];
 
-const reducer = combineReducers({ dummyReducers });
-
-const store = createStore(
-  reducer,
-  applyMiddleware(thunk),
-);
-
-export default store;
+export default function configureStore() {
+  return createStore(
+    rootReducer,
+    applyMiddleware(...middlewares),
+  );
+}

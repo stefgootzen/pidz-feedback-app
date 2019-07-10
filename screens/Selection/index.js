@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { FlatList, TouchableHighlight } from 'react-native';
 import styled from 'styled-components';
+import { setSubject } from '../../actions/formActions';
 import Header from '../../components/Header';
 import employees from './employees.json';
 import UserCard from '../../components/UserCard';
@@ -29,32 +31,54 @@ const BodyText = styled.Text`
   ${Typography.fatBodyText};
 `;
 
-const Selection = ({ navigation }) => (
-  <Wrapper>
-    <BodyText>Hallo Guus, over wie wil je vandaag iets vertellen?</BodyText>
-    <FlatListHeading>PIDZers werkzaam bij SWZ</FlatListHeading>
-    <FlatList
-      data={employees}
-      keyExtractor={item => item.id.toString()}
-      ItemSeparatorComponent={() => <FlatListItemSeperator />}
-      renderItem={({ item }) => (
-        <TouchableHighlight onPress={() => navigation.navigate('Feedback')}>
-          <UserCard
-            picture={item.picture}
-            name={item.name}
-          />
-        </TouchableHighlight>
-      )}
-    />
-  </Wrapper>
-);
+class Selection extends React.Component {
+  handleClick = (values) => {
+    const {
+      setSubject,
+      navigation,
+    } = this.props;
+
+    setSubject(values);
+    navigation.navigate('Feedback');
+  };
+
+  render() {
+    return (
+      <Wrapper>
+        <BodyText>Hallo Guus, over wie wil je vandaag iets vertellen?</BodyText>
+        <FlatListHeading>PIDZers werkzaam bij SWZ</FlatListHeading>
+        <FlatList
+          data={employees}
+          keyExtractor={item => item.id.toString()}
+          ItemSeparatorComponent={() => <FlatListItemSeperator />}
+          renderItem={({ item }) => (
+            <TouchableHighlight onPress={() => this.handleClick(item)}>
+              <UserCard
+                picture={item.picture}
+                name={item.name}
+              />
+            </TouchableHighlight>
+          )}
+        />
+      </Wrapper>
+    );
+  }
+}
 
 Selection.navigationOptions = {
   header: <Header>Selection</Header>,
 };
 
+const mapDispatchToProps = dispatch => ({
+  setSubject: subject => dispatch(setSubject(subject)),
+});
+
 Selection.propTypes = {
   navigation: PropTypes.shape().isRequired,
+  setSubject: PropTypes.func.isRequired,
 };
 
-export default Selection;
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Selection);

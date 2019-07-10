@@ -1,4 +1,4 @@
-import SET_TEXT from '../actions/types';
+import { SET_SUBJECT } from '../actions/types';
 
 const initialState = {
   subject: {
@@ -7,17 +7,20 @@ const initialState = {
   },
 };
 
-const dummyReducer = (state = initialState, action = {}) => {
+const formReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_TEXT:
+    case SET_SUBJECT:
       return {
         ...state,
-        text: action.payload.data,
+        subject: {
+          ...state.subject,
+          id: action.payload.id,
+          name: action.payload.name,
+        },
       };
-
     default:
       return state;
   }
 };
 
-export default dummyReducer;
+export default formReducer;
