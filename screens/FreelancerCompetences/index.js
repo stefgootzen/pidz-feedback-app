@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { ButtonGroup } from 'react-native-elements';
 import { Formik } from 'formik';
-import Button from '../../components/Button';
 import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setSuitability } from '../../actions/formActions';
+import Button from '../../components/Button';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -23,32 +22,7 @@ const BodyText = styled.Text`
   ${Typography.fatBodyText};
 `;
 
-const StyledTextInput = styled.TextInput`
-  background-color: white;
-  padding: ${Spacing.small}px;
-  border-radius: 3px;
-`;
-
-const StyledButtonGroup = styled(ButtonGroup).attrs({
-  buttonStyle: {
-    backgroundColor: 'white',
-  },
-  textStyle: {
-    color: Colors.pidzDarkBlue,
-  },
-  selectedButtonStyle: {
-    backgroundColor: Colors.pidzDarkBlue,
-  },
-  selectedTextStyle: {
-    color: 'white',
-  },
-  containerStyle: {
-    marginLeft: 0,
-    marginRight: 0,
-  },
-})``;
-
-const Suitability = ({ setSuitability, navigation, subjectName }) => (
+const FreelancerCompetences = ({ setSuitability, navigation, subjectName }) => (
   <Wrapper>
     <Formik
       initialValues={{ clarification: '', suitable: 0 }}
@@ -68,29 +42,12 @@ const Suitability = ({ setSuitability, navigation, subjectName }) => (
         };
 
         setSuitability(suitableForDepartment);
-        navigation.navigate('FreelancerCompetences');
+        navigation.navigate('');
       }}
     >
       {props => (
         <FullHeightView>
-          <BodyText>{`Vind je ${subjectName} geschikt om op deze afdeling te werken?`}</BodyText>
-          <StyledButtonGroup
-            onPress={value => props.setFieldValue('suitable', value)}
-            selectedIndex={props.values.suitable}
-            buttons={['Ja', 'Nee']}
-            value={props.values.suitable}
-            onBlur={() => props.setFieldTouched('suitable')}
-            errorMessage={
-              props.touched.suitable && props.errors.suitable ? props.errors.suitable : undefined
-            }
-          />
-          <BodyText>Toelichting</BodyText>
-          <StyledTextInput
-            onChangeText={props.handleChange('clarification')}
-            onBlur={props.handleBlur('clarification')}
-            value={props.values.clarification}
-            underlineColorAndroid={Colors.darkGrey}
-          />
+          <BodyText>{`Hoe presteert ${subjectName} op de onderstaande competentie?`}</BodyText>
           <Button
             onPress={props.handleSubmit}
             title="Volgende"
@@ -101,16 +58,16 @@ const Suitability = ({ setSuitability, navigation, subjectName }) => (
   </Wrapper>
 );
 
-Suitability.navigationOptions = {
+FreelancerCompetences.navigationOptions = {
   header: <Header>Feedback</Header>,
 };
 
-Suitability.propTypes = {
+FreelancerCompetences.propTypes = {
   navigation: PropTypes.shape().isRequired,
   subjectName: PropTypes.string,
 };
 
-Suitability.defaultProps = {
+FreelancerCompetences.defaultProps = {
   subjectName: null,
 };
 
@@ -125,4 +82,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Suitability);
+)(FreelancerCompetences);
