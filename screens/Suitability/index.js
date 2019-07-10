@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Button, ButtonGroup } from 'react-native-elements';
@@ -61,7 +60,7 @@ const StyledButtonGroup = styled(ButtonGroup).attrs({
   },
 })``;
 
-const Feedback = ({ setSuitability, navigation, subjectName }) => (
+const Suitability = ({ setSuitability, navigation, subjectName }) => (
   <Wrapper>
     <Formik
       initialValues={{ clarification: '', suitable: 0 }}
@@ -114,16 +113,16 @@ const Feedback = ({ setSuitability, navigation, subjectName }) => (
   </Wrapper>
 );
 
-Feedback.navigationOptions = {
+Suitability.navigationOptions = {
   header: <Header>Feedback</Header>,
 };
 
-Feedback.propTypes = {
+Suitability.propTypes = {
   navigation: PropTypes.shape().isRequired,
   subjectName: PropTypes.string,
 };
 
-Feedback.defaultProps = {
+Suitability.defaultProps = {
   subjectName: null,
 };
 
@@ -138,4 +137,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Feedback);
+)(Suitability);

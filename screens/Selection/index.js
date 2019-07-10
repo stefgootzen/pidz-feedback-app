@@ -39,7 +39,7 @@ class Selection extends React.Component {
     } = this.props;
 
     setSubject(values);
-    navigation.navigate('Feedback');
+    navigation.navigate('Suitability');
   };
 
   render() {
