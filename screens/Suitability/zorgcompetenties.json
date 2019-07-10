@@ -1,0 +1,38 @@
+[
+  {
+    "id": 0,
+    "name": "Flexibiliteit",
+    "levels": [
+      {
+        "level": 2,
+        "description": "Past zich gemakkelijk aan bij nieuwe situaties en manieren van werken. Staat open voor veranderingen en is bereid zich hieraan aan te passen."
+      },
+      {
+        "level": 1,
+        "description": "Past zich niet altijd gemakkelijk bij nieuwe situaties en manieren van werken. Staat niet altijd open voor veranderingen en is niet altijd bereid zich hieraan aan te passen."
+      },
+      {
+        "level": 0,
+        "description": "Past zich niet aan bij nieuwe situaties en manieren van werken. Staat niet open voor veranderingen en is niet bereid zich hieraan aan te passen."
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Kwaliteitsgerichtheid",
+    "levels": [
+      {
+        "level": 2,
+        "description": "Spant zich in voor het leveren van kwalitatief goed werk en is gericht op het behalen of overtreffen van de gestelde kwalitetsmaatstaf."
+      },
+      {
+        "level": 1,
+        "description": "Spant zich in voor het leveren van kwalitatief goed werk en is soms gericht op het behalen van de gestelde kwalitetsmaatstaf."
+      },
+      {
+        "level": 0,
+        "description": "Past zich niet in voor het leveren van kwalitatief goed werk en is zeker niet gericht op het behalen of overtreffen van de gestelde kwaliteitsmaatstaf."
+      }
+    ]
+  },
+]

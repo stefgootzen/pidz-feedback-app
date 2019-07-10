@@ -9,21 +9,15 @@ export const smallestFontSize = 10;
 export const largeHeaderFontSize = 20;
 export const headerFontSize = 18;
 
-export const link = {
-  color: Colors.tint,
-  fontWeight: 'bold',
-};
-
 export const bodyText = {
   color: Colors.baseText,
   fontSize: baseFontSize,
   lineHeight: 19,
 };
 
-export const userCardText = {
+export const fatBodyText = {
   color: Colors.darkText,
-  fontSize: smallFontSize,
-  lineHeight: 19,
+  fontSize: baseFontSize,
   fontWeight: 'bold',
 };
 
@@ -33,13 +27,9 @@ export const headerText = {
   fontWeight: 'bold',
 };
 
-export const sectionHeading = {
+export const userCardText = {
   color: Colors.darkText,
-  fontSize: headerFontSize,
-  fontWeight: 'bold',
-};
-
-export const descriptionText = {
-  color: Colors.baseText,
   fontSize: smallFontSize,
+  lineHeight: 19,
+  fontWeight: 'bold',
 };

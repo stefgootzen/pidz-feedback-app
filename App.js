@@ -1,12 +1,14 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import Feedback from './screens/Feedback';
+import configureStore from './store';
+import Suitability from './screens/Suitability';
 import Selection from './screens/Selection';
 import fromRight from './utils/transitionConfig';
 
 const MainNavigator = createStackNavigator({
-  Feedback: {
-    screen: Feedback,
+  Suitability: {
+    screen: Suitability,
   },
   Selection: {
     screen: Selection,
@@ -20,7 +22,9 @@ const MainNavigator = createStackNavigator({
 const AppContainer = createAppContainer(MainNavigator);
 
 const App = () => (
-  <AppContainer />
+  <Provider store={configureStore()}>
+    <AppContainer />
+  </Provider>
 );
 
 export default App;
