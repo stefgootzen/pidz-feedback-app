@@ -16,7 +16,7 @@ export const link = {
 
 export const bodyText = {
   color: Colors.baseText,
-  fontSize: smallFontSize,
+  fontSize: baseFontSize,
   lineHeight: 19,
 };
 
@@ -28,6 +28,12 @@ export const userCardText = {
 };
 
 export const headerText = {
+  color: Colors.darkText,
+  fontSize: largeHeaderFontSize,
+  fontWeight: 'bold',
+};
+
+export const sectionHeading = {
   color: Colors.darkText,
   fontSize: headerFontSize,
   fontWeight: 'bold',

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Header from '../../components/Header';
 import employees from './employees.json';
 import UserCard from '../../components/UserCard';
-import { Colors, Spacing } from '../../styles';
+import { Colors, Spacing, Typography } from '../../styles';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -19,8 +19,20 @@ const FlatListItemSeperator = styled.View`
   background-color: ${Colors.background};
 `;
 
+const FlatListHeading = styled.Text`
+  ${Typography.bodyText};
+  margin-bottom: 5px;
+  margin-top: 15px;
+`;
+
+const HeadingText = styled.Text`
+  ${Typography.sectionHeading};
+`;
+
 const Selection = ({ navigation }) => (
   <Wrapper>
+    <HeadingText>Hallo Guus, over wie wil je vandaag iets vertellen?</HeadingText>
+    <FlatListHeading>PIDZers werkzaam bij SWZ</FlatListHeading>
     <FlatList
       data={employees}
       keyExtractor={item => item.index.toString()}

@@ -12,7 +12,7 @@ const Wrapper = styled.View`
   background-color: ${Colors.background};
   ${Spacing.sectionPadding};
   padding-top: 40px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 `;
 
 const Line = styled.View`
