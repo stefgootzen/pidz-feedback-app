@@ -25,13 +25,13 @@ const FlatListHeading = styled.Text`
   margin-top: 15px;
 `;
 
-const HeadingText = styled.Text`
-  ${Typography.sectionHeading};
+const BodyText = styled.Text`
+  ${Typography.fatBodyText};
 `;
 
 const Selection = ({ navigation }) => (
   <Wrapper>
-    <HeadingText>Hallo Guus, over wie wil je vandaag iets vertellen?</HeadingText>
+    <BodyText>Hallo Guus, over wie wil je vandaag iets vertellen?</BodyText>
     <FlatListHeading>PIDZers werkzaam bij SWZ</FlatListHeading>
     <FlatList
       data={employees}
