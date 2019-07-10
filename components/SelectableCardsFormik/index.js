@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'formik';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Colors, Spacing } from '../../styles';
 
 const Card = styled.View`
@@ -12,13 +13,7 @@ const Card = styled.View`
   padding: ${Spacing.small}px;
   margin-bottom: ${Spacing.small}px;
   border-radius: 5px;
-  display: flex;
   align-items: center;
-`;
-
-const Line = styled.View`
-  border-bottom-color: ${Colors.pidzDarkBlue};
-  border-bottom-width: 1px;
 `;
 
 const CenteredText = styled.Text`
@@ -35,6 +30,19 @@ class SelectableCardsFormik extends React.PureComponent {
     setFieldValue(name, value);
   };
 
+  renderRightSmiley = (level) => {
+    switch (level) {
+      case 0:
+        return <FontAwesomeIcon icon="frown" />;
+      case 1:
+        return <FontAwesomeIcon icon="meh" />;
+      case 2:
+        return <FontAwesomeIcon icon="smile" />;
+      default:
+        return null;
+    }
+  };
+
   render() {
     const {
       items: { levels },
@@ -49,10 +57,9 @@ class SelectableCardsFormik extends React.PureComponent {
               key={description}
             >
               <Card selected={value === index}>
-                <Text>
-                  {level}
-                </Text>
-                <Line />
+                <View>
+                  { this.renderRightSmiley(level)}
+                </View>
                 <CenteredText>
                   {description}
                 </CenteredText>
