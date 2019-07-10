@@ -1,3 +1,5 @@
 # pidz-review
+Onderdeel van het afstudeerproject "Op weg naar de beste match" van Stef Gootzen.
 
-My name is stan
+**Uitdaging:**
+Ontwerp een systeem waarmee het functioneren van de ingezette ZZP' er beoordeeld kan worden.
