@@ -35,7 +35,7 @@ const Selection = ({ navigation }) => (
     <FlatListHeading>PIDZers werkzaam bij SWZ</FlatListHeading>
     <FlatList
       data={employees}
-      keyExtractor={item => item.index.toString()}
+      keyExtractor={item => item.id.toString()}
       ItemSeparatorComponent={() => <FlatListItemSeperator />}
       renderItem={({ item }) => (
         <TouchableHighlight onPress={() => navigation.navigate('Feedback')}>
