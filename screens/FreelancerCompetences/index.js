@@ -7,6 +7,8 @@ import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setSuitability } from '../../actions/formActions';
 import Button from '../../components/Button';
+import freelancerCompetencesInfo from './freelancerCompetences';
+import SelectableCardsFormik from '../../components/SelectableCardsFormik';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -22,41 +24,42 @@ const BodyText = styled.Text`
   ${Typography.fatBodyText};
 `;
 
-const FreelancerCompetences = ({ setSuitability, navigation, subjectName }) => (
-  <Wrapper>
-    <Formik
-      initialValues={{ clarification: '', suitable: 0 }}
-      onSubmit={(values) => {
-        let isSuitable;
-        if (values.suitable === 0) {
-          isSuitable = true;
-        } else if (values.suitable === 1) {
-          isSuitable = false;
-        }
-
-        const clarification = values.clarification.length === 0 ? null : values.clarification;
-
-        const suitableForDepartment = {
-          isSuitable,
-          clarification,
-        };
-
-        setSuitability(suitableForDepartment);
-        navigation.navigate('');
-      }}
-    >
-      {props => (
-        <FullHeightView>
-          <BodyText>{`Hoe presteert ${subjectName} op de onderstaande competentie?`}</BodyText>
-          <Button
-            onPress={props.handleSubmit}
-            title="Volgende"
-          />
-        </FullHeightView>
-      )}
-    </Formik>
-  </Wrapper>
-);
+const FreelancerCompetences = ({ setSuitability, navigation, subjectName }) => {
+  const currentCompetenceInfo = freelancerCompetencesInfo[0];
+  const currentCompetenceName = currentCompetenceInfo.name;
+  console.log(currentCompetenceInfo);
+  return (
+    <Wrapper>
+      <Formik
+        onSubmit={(values) => {
+          setSuitability(values);
+          navigation.navigate('');
+        }}
+      >
+        {props => (
+          <FullHeightView>
+            <BodyText>{`Hoe presteert ${subjectName} op de onderstaande competentie?`}</BodyText>
+            <BodyText>{currentCompetenceName}</BodyText>
+            <SelectableCardsFormik
+              items={currentCompetenceInfo}
+              value={props.values[currentCompetenceName]}
+              errorMessage={
+                props.touched[currentCompetenceName]
+                && props.errors[currentCompetenceName]
+                  ? props.error[currentCompetenceName] : undefined
+              }
+              name={currentCompetenceName}
+            />
+            <Button
+              onPress={props.handleSubmit}
+              title="Volgende"
+            />
+          </FullHeightView>
+        )}
+      </Formik>
+    </Wrapper>
+  );
+};
 
 FreelancerCompetences.navigationOptions = {
   header: <Header>Feedback</Header>,
