@@ -9,6 +9,9 @@
     "eslint": "eslint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/react-native-fontawesome": "^0.1.0",
     "expo": "^33.0.0",
     "formik": "^1.5.7",
     "prop-types": "^15.7.2",

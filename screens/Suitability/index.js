@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Button, ButtonGroup } from 'react-native-elements';
+import { ButtonGroup } from 'react-native-elements';
 import { Formik } from 'formik';
+import Button from '../../components/Button';
 import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setSuitability } from '../../actions/formActions';
@@ -27,19 +28,6 @@ const StyledTextInput = styled.TextInput`
   padding: ${Spacing.small}px;
   border-radius: 3px;
 `;
-
-const StyledButton = styled(Button).attrs({
-  containerStyle: {
-    marginTop: 'auto',
-    marginBottom: Spacing.small,
-  },
-  buttonStyle: {
-    backgroundColor: Colors.tint,
-  },
-  textStyle: {
-    color: 'white',
-  },
-})``;
 
 const StyledButtonGroup = styled(ButtonGroup).attrs({
   buttonStyle: {
@@ -80,7 +68,7 @@ const Suitability = ({ setSuitability, navigation, subjectName }) => (
         };
 
         setSuitability(suitableForDepartment);
-        navigation.navigate('');
+        navigation.navigate('FreelancerCompetences');
       }}
     >
       {props => (
@@ -103,9 +91,9 @@ const Suitability = ({ setSuitability, navigation, subjectName }) => (
             value={props.values.clarification}
             underlineColorAndroid={Colors.darkGrey}
           />
-          <StyledButton
+          <Button
             onPress={props.handleSubmit}
-            title="Submit"
+            title="Volgende"
           />
         </FullHeightView>
       )}
