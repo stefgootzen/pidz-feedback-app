@@ -41,9 +41,6 @@ class FreelancerCompetences extends React.Component {
       currentCompetenceIndex,
     } = this.state;
 
-    console.log(currentCompetenceIndex);
-    console.log(freelancerCompetencesInfo.length - 1);
-
     if (currentCompetenceIndex === freelancerCompetencesInfo.length - 1) {
       navigation.navigate('Selection');
     } else {

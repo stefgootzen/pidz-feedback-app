@@ -10,6 +10,7 @@ const initialState = {
     clarification: null,
   },
   freelancerCompetences: null,
+  factors: null,
 };
 
 const formReducer = (state = initialState, action) => {

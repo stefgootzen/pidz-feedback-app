@@ -8,6 +8,7 @@ import {
 import configureStore from './store';
 import Suitability from './screens/Suitability';
 import Selection from './screens/Selection';
+import Factors from './screens/Factors';
 import FreelancerCompetences from './screens/FreelancerCompetences';
 import fromRight from './utils/transitionConfig';
 
@@ -23,9 +24,12 @@ const MainNavigator = createStackNavigator({
   FreelancerCompetences: {
     screen: FreelancerCompetences,
   },
+  Factors: {
+    screen: Factors,
+  },
 },
 {
-  initialRouteName: 'Selection',
+  initialRouteName: 'Factors',
   transitionConfig: () => fromRight(),
 });
 

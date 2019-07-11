@@ -66,7 +66,7 @@ class Selection extends React.Component {
 }
 
 Selection.navigationOptions = {
-  header: <Header>Selection</Header>,
+  header: <Header>Selectie</Header>,
 };
 
 const mapDispatchToProps = dispatch => ({
