@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
-import { setSuitability } from '../../actions/formActions';
+import { setFreelancerCompetence } from '../../actions/formActions';
 import Button from '../../components/Button';
 import freelancerCompetencesInfo from './freelancerCompetences';
 import SelectableCardsFormik from '../../components/SelectableCardsFormik';
@@ -24,42 +24,79 @@ const BodyText = styled.Text`
   ${Typography.fatBodyText};
 `;
 
-const FreelancerCompetences = ({ setSuitability, navigation, subjectName }) => {
-  const currentCompetenceInfo = freelancerCompetencesInfo[0];
-  const currentCompetenceName = currentCompetenceInfo.name;
-  console.log(currentCompetenceInfo);
-  return (
-    <Wrapper>
-      <Formik
-        onSubmit={(values) => {
-          setSuitability(values);
-          navigation.navigate('');
-        }}
-      >
-        {props => (
-          <FullHeightView>
-            <BodyText>{`Hoe presteert ${subjectName} op de onderstaande competentie?`}</BodyText>
-            <BodyText>{currentCompetenceName}</BodyText>
-            <SelectableCardsFormik
-              items={currentCompetenceInfo}
-              value={props.values[currentCompetenceName]}
-              errorMessage={
+class FreelancerCompetences extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentCompetenceIndex: 0,
+    };
+  }
+
+  determineNextStep = () => {
+    const {
+      navigation,
+    } = this.props;
+
+    const {
+      currentCompetenceIndex,
+    } = this.state;
+
+    console.log(currentCompetenceIndex);
+    console.log(freelancerCompetencesInfo.length - 1);
+
+    if (currentCompetenceIndex === freelancerCompetencesInfo.length - 1) {
+      navigation.navigate('Selection');
+    } else {
+      this.setState(prevState => ({
+        currentCompetenceIndex: prevState.currentCompetenceIndex + 1,
+      }));
+    }
+  };
+
+  render() {
+    const {
+      subjectName,
+    } = this.props;
+
+    const {
+      currentCompetenceIndex,
+    } = this.state;
+
+    const currentCompetenceInfo = freelancerCompetencesInfo[currentCompetenceIndex];
+    const currentCompetenceName = currentCompetenceInfo.name;
+    return (
+      <Wrapper>
+        <Formik
+          onSubmit={(competence) => {
+            setFreelancerCompetence(competence);
+            this.determineNextStep(competence);
+          }}
+        >
+          {props => (
+            <FullHeightView>
+              <BodyText>{`Hoe presteert ${subjectName} op de onderstaande competentie?`}</BodyText>
+              <BodyText>{currentCompetenceName}</BodyText>
+              <SelectableCardsFormik
+                items={currentCompetenceInfo}
+                value={props.values[currentCompetenceName]}
+                errorMessage={
                 props.touched[currentCompetenceName]
                 && props.errors[currentCompetenceName]
                   ? props.error[currentCompetenceName] : undefined
               }
-              name={currentCompetenceName}
-            />
-            <Button
-              onPress={props.handleSubmit}
-              title="Volgende"
-            />
-          </FullHeightView>
-        )}
-      </Formik>
-    </Wrapper>
-  );
-};
+                name={currentCompetenceName}
+              />
+              <Button
+                onPress={props.handleSubmit}
+                title="Volgende"
+              />
+            </FullHeightView>
+          )}
+        </Formik>
+      </Wrapper>
+    );
+  }
+}
 
 FreelancerCompetences.navigationOptions = {
   header: <Header>Feedback</Header>,
@@ -79,7 +116,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSuitability: values => dispatch(setSuitability(values)),
+  setFreelancerCompetence: values => dispatch(setFreelancerCompetence(values)),
 });
 
 export default connect(

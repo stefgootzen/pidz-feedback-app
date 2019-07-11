@@ -25,7 +25,7 @@ const MainNavigator = createStackNavigator({
   },
 },
 {
-  initialRouteName: 'FreelancerCompetences',
+  initialRouteName: 'Selection',
   transitionConfig: () => fromRight(),
 });
 
