@@ -1,4 +1,6 @@
-import { SET_FREELANCER_COMPETENCE, SET_SUBJECT, SET_SUITABILITY } from './types';
+import {
+  SET_FREELANCER_COMPETENCE, SET_SUBJECT, SET_SUITABILITY, SET_FACTORS,
+} from './types';
 
 export const setSubject = data => (dispatch) => {
   dispatch({
@@ -15,8 +17,16 @@ export const setSuitability = data => (dispatch) => {
 };
 
 export const setFreelancerCompetence = data => (dispatch) => {
+  console.log('in competence action');
   dispatch({
     type: SET_FREELANCER_COMPETENCE,
+    payload: data,
+  });
+};
+
+export const setFactors = data => (dispatch) => {
+  dispatch({
+    type: SET_FACTORS,
     payload: data,
   });
 };

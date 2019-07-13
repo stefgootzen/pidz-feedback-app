@@ -9,6 +9,7 @@ import { Colors, Spacing, Typography } from '../../styles';
 import { setSuitability } from '../../actions/formActions';
 import ButtonGroup from '../../components/ButtonGroup';
 import { btnGroupYesNoToBool } from '../../utils/btnGroupYesNoToBool';
+import StyledTextInput from '../../components/StyledTextInput';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -22,12 +23,6 @@ const FullHeightView = styled.View`
 
 const BodyText = styled.Text`
   ${Typography.fatBodyText};
-`;
-
-const StyledTextInput = styled.TextInput`
-  background-color: white;
-  padding: ${Spacing.small}px;
-  border-radius: 3px;
 `;
 
 const Suitability = ({ setSuitability, navigation, subjectName }) => (

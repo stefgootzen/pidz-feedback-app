@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Text } from 'react-native';
 import { Formik } from 'formik';
 import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
-import { setFreelancerCompetence } from '../../actions/formActions';
+import { setFactors } from '../../actions/formActions';
 import Button from '../../components/Button';
 import factors from './factors';
 import SelectableFactorCards from '../../components/SelectableFactorCards';
+import StyledTextInput from '../../components/StyledTextInput';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -35,14 +35,20 @@ class Factors extends React.PureComponent {
   render() {
     const {
       subjectName,
+      navigation,
+      setFactors,
     } = this.props;
 
     return (
       <Wrapper>
         <Formik
-          initialValues={{ factors: initialFactors }}
+          initialValues={{
+            factors: initialFactors,
+            otherFactor: '',
+          }}
           onSubmit={(values) => {
-            setFreelancerCompetence(values.factors);
+            setFactors(values.factors);
+            navigation.navigate('Closing');
           }}
         >
           {props => (
@@ -52,6 +58,12 @@ class Factors extends React.PureComponent {
                 onChange={value => props.setFieldValue('factors', value)}
                 name="factors"
                 values={props.values.factors}
+              />
+              <StyledTextInput
+                onChangeText={props.handleChange('otherFactor')}
+                onBlur={props.handleBlur('otherFactor')}
+                value={props.values.otherFactor}
+                underlineColorAndroid={Colors.darkGrey}
               />
               <Button
                 onPress={props.handleSubmit}
@@ -70,7 +82,7 @@ Factors.navigationOptions = {
 };
 
 Factors.propTypes = {
-  // navigation: PropTypes.shape().isRequired,
+  navigation: PropTypes.shape().isRequired,
   subjectName: PropTypes.string,
 };
 
@@ -83,7 +95,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setFreelancerCompetence: values => dispatch(setFreelancerCompetence(values)),
+  setFactors: values => dispatch(setFactors(values)),
 });
 
 export default connect(

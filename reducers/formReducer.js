@@ -1,4 +1,6 @@
-import { SET_FREELANCER_COMPETENCE, SET_SUBJECT, SET_SUITABILITY } from '../actions/types';
+import {
+  SET_FACTORS, SET_FREELANCER_COMPETENCE, SET_SUBJECT, SET_SUITABILITY,
+} from '../actions/types';
 
 const initialState = {
   subject: {
@@ -40,6 +42,11 @@ const formReducer = (state = initialState, action) => {
           ...state.freelancerCompetences,
           ...action.payload,
         },
+      };
+    case SET_FACTORS:
+      return {
+        ...state,
+        factors: action.payload,
       };
     default:
       return state;

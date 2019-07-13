@@ -42,7 +42,7 @@ class FreelancerCompetences extends React.Component {
     } = this.state;
 
     if (currentCompetenceIndex === freelancerCompetencesInfo.length - 1) {
-      navigation.navigate('Selection');
+      navigation.navigate('Factors');
     } else {
       this.setState(prevState => ({
         currentCompetenceIndex: prevState.currentCompetenceIndex + 1,
@@ -53,6 +53,7 @@ class FreelancerCompetences extends React.Component {
   render() {
     const {
       subjectName,
+      setFreelancerCompetence,
     } = this.props;
 
     const {
@@ -65,6 +66,7 @@ class FreelancerCompetences extends React.Component {
       <Wrapper>
         <Formik
           onSubmit={(competence) => {
+            console.log('on submit');
             setFreelancerCompetence(competence);
             this.determineNextStep(competence);
           }}
