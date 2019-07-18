@@ -103,6 +103,7 @@ class OtherFactorCards extends React.PureComponent {
 
     this.setState(prevState => ({ //eslint-disable-line
       idCounter: prevState.idCounter += 1, //eslint-disable-line
+      newFactor: '',
     }));
 
     onChange(values);
