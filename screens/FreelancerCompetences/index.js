@@ -8,7 +8,7 @@ import { Colors, Spacing, Typography } from '../../styles';
 import { setFreelancerCompetence } from '../../actions/formActions';
 import Button from '../../components/Button';
 import freelancerCompetencesInfo from './freelancerCompetences';
-import SelectableCardsFormik from '../../components/SelectableCardsFormik';
+import SelectableCards from '../../components/SelectableCards';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -74,17 +74,17 @@ class FreelancerCompetences extends React.Component {
             <FullHeightView>
               <BodyText>{`Hoe presteert ${subjectName} op de onderstaande competentie?`}</BodyText>
               <BodyText>{currentCompetenceName}</BodyText>
-              <SelectableCardsFormik
-                items={currentCompetenceInfo}
-                value={props.values[currentCompetenceName]}
+              <SelectableCards
+                competence={currentCompetenceInfo}
+                selectedLevel={props.values[currentCompetenceName]}
                 name={currentCompetenceName}
               />
               <Button
                 onPress={props.handleSubmit}
                 title="Volgende"
                 disabled={
-                  !Object.prototype.hasOwnProperty.call(props.values, currentCompetenceName)
-                }
+                    !Object.prototype.hasOwnProperty.call(props.values, currentCompetenceName)
+                  }
               />
             </FullHeightView>
           )}
