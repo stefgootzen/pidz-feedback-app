@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
-import { setFactors } from '../../actions/formActions';
+import { setFactors, setOtherFactors } from '../../actions/formActions';
 import Button from '../../components/Button';
 import factors from './factors';
 import SelectableFactorCards from '../../components/SelectableFactorCards';
-import StyledTextInput from '../../components/StyledTextInput';
+import OtherFactorCards from '../../components/OtherFactorCards';
 
 const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
   ${Spacing.sectionPadding};
@@ -39,16 +39,22 @@ class Factors extends React.PureComponent {
       subjectName,
       navigation,
       setFactors,
+      setOtherFactors,
     } = this.props;
 
     return (
       <Formik
         initialValues={{
           factors: initialFactors,
-          otherFactor: '',
+          otherFactors: [],
         }}
         onSubmit={(values) => {
           setFactors(values.factors);
+
+          // If user inserted other factors, also call setOtherFactors
+          if (values.otherFactors.length >= 1) {
+            setOtherFactors(values.otherFactors);
+          }
           navigation.navigate('Closing');
         }}
       >
@@ -61,11 +67,10 @@ class Factors extends React.PureComponent {
                 name="factors"
                 values={props.values.factors}
               />
-              <StyledTextInput
-                onChangeText={props.handleChange('otherFactor')}
-                onBlur={props.handleBlur('otherFactor')}
-                value={props.values.otherFactor}
-                underlineColorAndroid={Colors.darkGrey}
+              <OtherFactorCards
+                onChange={value => props.setFieldValue('otherFactors', value)}
+                name="otherFactors"
+                values={props.values.otherFactors}
               />
             </ScrollView>
             <ButtonWrapper>
@@ -100,6 +105,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setFactors: values => dispatch(setFactors(values)),
+  setOtherFactors: values => dispatch(setOtherFactors(values)),
 });
 
 export default connect(

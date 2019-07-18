@@ -4,7 +4,7 @@ import { connect } from 'formik';
 import styled from 'styled-components';
 import { Spacing, Typography } from '../../styles';
 import ButtonGroup from '../ButtonGroup';
-import SelectableSmileys from './SelectableSmileys';
+import SelectableSmileys from '../SelectableSmileys';
 import { btnGroupBoolToYesNo, btnGroupYesNoToBool } from '../../utils/btnGroupYesNoToBool';
 
 const FlexRow = styled(View)`
@@ -88,10 +88,10 @@ class SelectableFactorCards extends React.PureComponent {
       <View>
         <FlexRow>
           <OneThird>
-            <FatBodyText>Relevant</FatBodyText>
+            <BodyText>Relevant</BodyText>
           </OneThird>
           <TwoThird>
-            <FatBodyText>Beoordeling</FatBodyText>
+            <BodyText>Beoordeling</BodyText>
           </TwoThird>
         </FlexRow>
         {
