@@ -77,16 +77,14 @@ class FreelancerCompetences extends React.Component {
               <SelectableCardsFormik
                 items={currentCompetenceInfo}
                 value={props.values[currentCompetenceName]}
-                errorMessage={
-                props.touched[currentCompetenceName]
-                && props.errors[currentCompetenceName]
-                  ? props.error[currentCompetenceName] : undefined
-              }
                 name={currentCompetenceName}
               />
               <Button
                 onPress={props.handleSubmit}
                 title="Volgende"
+                disabled={
+                  !Object.prototype.hasOwnProperty.call(props.values, currentCompetenceName)
+                }
               />
             </FullHeightView>
           )}
