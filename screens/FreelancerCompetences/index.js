@@ -66,7 +66,6 @@ class FreelancerCompetences extends React.Component {
       <Wrapper>
         <Formik
           onSubmit={(competence) => {
-            console.log('on submit');
             setFreelancerCompetence(competence);
             this.determineNextStep(competence);
           }}

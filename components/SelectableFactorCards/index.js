@@ -41,7 +41,7 @@ const TwoThird = styled(View)`
   opacity: ${props => (props.disabled ? 0.2 : 1)}
 `;
 
-class SelectableFactorCards extends React.Component {
+class SelectableFactorCards extends React.PureComponent {
   handleButtonGroupChange = (factor, relevance) => {
     const {
       onChange,
@@ -107,7 +107,7 @@ class SelectableFactorCards extends React.Component {
               <TwoThird disabled={!factor.relevant}>
                 <BodyText>{factor.name}</BodyText>
                 <SelectableSmileys
-                  disabled={!factor.relevant}
+                  isDisabled={!factor.relevant}
                   handleChange={value => this.handleLevelChange(factor.name, value)}
                   currentLevel={factor.level}
                 />
