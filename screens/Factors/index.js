@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Header from '../../components/Header';
@@ -11,14 +12,15 @@ import factors from './factors';
 import SelectableFactorCards from '../../components/SelectableFactorCards';
 import StyledTextInput from '../../components/StyledTextInput';
 
-const Wrapper = styled.View`
+const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
   ${Spacing.sectionPadding};
-  background-color: ${Colors.background};
   height: 100%;
+  justify-content: space-between; 
+  background-color: ${Colors.background};
 `;
 
-const FullHeightView = styled.View`
-  height: 100%;
+const ButtonWrapper = styled.View`
+  padding-top: 10px;
 `;
 
 const BodyText = styled.Text`
@@ -40,19 +42,19 @@ class Factors extends React.PureComponent {
     } = this.props;
 
     return (
-      <Wrapper>
-        <Formik
-          initialValues={{
-            factors: initialFactors,
-            otherFactor: '',
-          }}
-          onSubmit={(values) => {
-            setFactors(values.factors);
-            navigation.navigate('Closing');
-          }}
-        >
-          {props => (
-            <FullHeightView>
+      <Formik
+        initialValues={{
+          factors: initialFactors,
+          otherFactor: '',
+        }}
+        onSubmit={(values) => {
+          setFactors(values.factors);
+          navigation.navigate('Closing');
+        }}
+      >
+        {props => (
+          <StyledKeyboardAvoidingView behavior="padding" enabled keyboardVerticalOffset={100}>
+            <ScrollView>
               <BodyText>{`Hoe presteert ${subjectName} op de onderstaande competenties?`}</BodyText>
               <SelectableFactorCards
                 onChange={value => props.setFieldValue('factors', value)}
@@ -65,14 +67,16 @@ class Factors extends React.PureComponent {
                 value={props.values.otherFactor}
                 underlineColorAndroid={Colors.darkGrey}
               />
+            </ScrollView>
+            <ButtonWrapper>
               <Button
                 onPress={props.handleSubmit}
                 title="Volgende"
               />
-            </FullHeightView>
-          )}
-        </Formik>
-      </Wrapper>
+            </ButtonWrapper>
+          </StyledKeyboardAvoidingView>
+        )}
+      </Formik>
     );
   }
 }
