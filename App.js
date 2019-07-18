@@ -33,7 +33,7 @@ const MainNavigator = createStackNavigator({
   },
 },
 {
-  initialRouteName: 'Selection',
+  initialRouteName: 'FreelancerCompetences',
   transitionConfig: () => fromRight(),
 });
 
