@@ -1,4 +1,6 @@
-import { SET_FREELANCER_COMPETENCE, SET_SUBJECT, SET_SUITABILITY } from '../actions/types';
+import {
+  SET_FACTORS, SET_FREELANCER_COMPETENCE, SET_OTHER_FACTORS, SET_SUBJECT, SET_SUITABILITY,
+} from '../actions/types';
 
 const initialState = {
   subject: {
@@ -10,6 +12,8 @@ const initialState = {
     clarification: null,
   },
   freelancerCompetences: null,
+  factors: null,
+  otherFactors: null,
 };
 
 const formReducer = (state = initialState, action) => {
@@ -39,6 +43,16 @@ const formReducer = (state = initialState, action) => {
           ...state.freelancerCompetences,
           ...action.payload,
         },
+      };
+    case SET_FACTORS:
+      return {
+        ...state,
+        factors: action.payload,
+      };
+    case SET_OTHER_FACTORS:
+      return {
+        ...state,
+        otherFactors: action.payload,
       };
     default:
       return state;

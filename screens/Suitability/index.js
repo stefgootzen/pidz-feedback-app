@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { ButtonGroup } from 'react-native-elements';
 import { Formik } from 'formik';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setSuitability } from '../../actions/formActions';
+import ButtonGroup from '../../components/ButtonGroup';
+import { btnGroupYesNoToBool } from '../../utils/btnGroupYesNoToBool';
+import StyledTextInput from '../../components/StyledTextInput';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -23,42 +25,12 @@ const BodyText = styled.Text`
   ${Typography.fatBodyText};
 `;
 
-const StyledTextInput = styled.TextInput`
-  background-color: white;
-  padding: ${Spacing.small}px;
-  border-radius: 3px;
-`;
-
-const StyledButtonGroup = styled(ButtonGroup).attrs({
-  buttonStyle: {
-    backgroundColor: 'white',
-  },
-  textStyle: {
-    color: Colors.pidzDarkBlue,
-  },
-  selectedButtonStyle: {
-    backgroundColor: Colors.pidzDarkBlue,
-  },
-  selectedTextStyle: {
-    color: 'white',
-  },
-  containerStyle: {
-    marginLeft: 0,
-    marginRight: 0,
-  },
-})``;
-
 const Suitability = ({ setSuitability, navigation, subjectName }) => (
   <Wrapper>
     <Formik
       initialValues={{ clarification: '', suitable: 0 }}
       onSubmit={(values) => {
-        let isSuitable;
-        if (values.suitable === 0) {
-          isSuitable = true;
-        } else if (values.suitable === 1) {
-          isSuitable = false;
-        }
+        const isSuitable = btnGroupYesNoToBool(values.suitable);
 
         const clarification = values.clarification.length === 0 ? null : values.clarification;
 
@@ -74,11 +46,11 @@ const Suitability = ({ setSuitability, navigation, subjectName }) => (
       {props => (
         <FullHeightView>
           <BodyText>{`Vind je ${subjectName} geschikt om op deze afdeling te werken?`}</BodyText>
-          <StyledButtonGroup
+          <ButtonGroup
             onPress={value => props.setFieldValue('suitable', value)}
             selectedIndex={props.values.suitable}
             buttons={['Ja', 'Nee']}
-            value={props.values.suitable}
+            value={props.values.suitable} // TODO: check if this is needed
             onBlur={() => props.setFieldTouched('suitable')}
             errorMessage={
               props.touched.suitable && props.errors.suitable ? props.errors.suitable : undefined

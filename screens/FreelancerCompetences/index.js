@@ -41,11 +41,8 @@ class FreelancerCompetences extends React.Component {
       currentCompetenceIndex,
     } = this.state;
 
-    console.log(currentCompetenceIndex);
-    console.log(freelancerCompetencesInfo.length - 1);
-
     if (currentCompetenceIndex === freelancerCompetencesInfo.length - 1) {
-      navigation.navigate('Selection');
+      navigation.navigate('Factors');
     } else {
       this.setState(prevState => ({
         currentCompetenceIndex: prevState.currentCompetenceIndex + 1,
@@ -56,6 +53,7 @@ class FreelancerCompetences extends React.Component {
   render() {
     const {
       subjectName,
+      setFreelancerCompetence,
     } = this.props;
 
     const {
