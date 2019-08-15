@@ -12,7 +12,7 @@ import SelectableCards from '../../components/SelectableCards';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
-  background-color: ${Colors.background};
+  background-color: ${Colors.pidzBackground};
   height: 100%;
 `;
 
@@ -20,8 +20,8 @@ const FullHeightView = styled.View`
   height: 100%;
 `;
 
-const BodyText = styled.Text`
-  ${Typography.fatBodyText};
+const ThinBodyText = styled.Text`
+  ${Typography.ThinBodyText};
 `;
 
 class FreelancerCompetences extends React.Component {
@@ -72,8 +72,8 @@ class FreelancerCompetences extends React.Component {
         >
           {props => (
             <FullHeightView>
-              <BodyText>{`Hoe presteert ${subjectName} op de onderstaande competentie?`}</BodyText>
-              <BodyText>{currentCompetenceName}</BodyText>
+              <ThinBodyText>{`Hoe presteert ${subjectName} op de onderstaande competentie?`}</ThinBodyText>
+              <ThinBodyText>{currentCompetenceName}</ThinBodyText>
               <SelectableCards
                 competence={currentCompetenceInfo}
                 selectedLevel={props.values[currentCompetenceName]}

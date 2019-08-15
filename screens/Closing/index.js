@@ -9,7 +9,7 @@ import { Colors, Spacing, Typography } from '../../styles';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
-  background-color: ${Colors.background};
+  background-color: ${Colors.pidzBackground};
   height: 100%;
 `;
 

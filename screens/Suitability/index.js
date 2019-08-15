@@ -13,7 +13,7 @@ import StyledTextInput from '../../components/StyledTextInput';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
-  background-color: ${Colors.background};
+  background-color: ${Colors.pidzBackground};
   height: 100%;
 `;
 
@@ -21,8 +21,8 @@ const FullHeightView = styled.View`
   height: 100%;
 `;
 
-const BodyText = styled.Text`
-  ${Typography.fatBodyText};
+const ThinBodyText = styled.Text`
+  ${Typography.ThinBodyText};
 `;
 
 const Suitability = ({ setSuitability, navigation, subjectName }) => (
@@ -45,7 +45,7 @@ const Suitability = ({ setSuitability, navigation, subjectName }) => (
     >
       {props => (
         <FullHeightView>
-          <BodyText>{`Vind je ${subjectName} geschikt om op deze afdeling te werken?`}</BodyText>
+          <ThinBodyText>{`Vind je ${subjectName} geschikt om op deze afdeling te werken?`}</ThinBodyText>
           <ButtonGroup
             onPress={value => props.setFieldValue('suitable', value)}
             selectedIndex={props.values.suitable}
@@ -56,7 +56,7 @@ const Suitability = ({ setSuitability, navigation, subjectName }) => (
               props.touched.suitable && props.errors.suitable ? props.errors.suitable : undefined
             }
           />
-          <BodyText>Toelichting</BodyText>
+          <ThinBodyText>Toelichting</ThinBodyText>
           <StyledTextInput
             onChangeText={props.handleChange('clarification')}
             onBlur={props.handleBlur('clarification')}

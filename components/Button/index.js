@@ -8,7 +8,7 @@ const Button = styled(NativeButton).attrs({
     marginBottom: Spacing.small,
   },
   buttonStyle: {
-    backgroundColor: Colors.tint,
+    backgroundColor: Colors.pidzDarkBlue,
   },
   textStyle: {
     color: 'white',

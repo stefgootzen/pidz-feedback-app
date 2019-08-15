@@ -16,7 +16,7 @@ const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
   ${Spacing.sectionPadding};
   height: 100%;
   justify-content: space-between; 
-  background-color: ${Colors.background};
+  background-color: ${Colors.pidzBackground};
 `;
 
 const ButtonWrapper = styled.View`
