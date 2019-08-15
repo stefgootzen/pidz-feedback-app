@@ -3,6 +3,7 @@ import { View, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'formik';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { Colors } from '../../styles';
 
 const FlexRow = styled(View)`
   display: flex;
@@ -20,7 +21,7 @@ class SelectableSmileys extends React.PureComponent {
       return 0.3;
     }
 
-    return currentLevel === levelOfSmiley ? 1 : 0.6;
+    return currentLevel === levelOfSmiley ? 1 : 0.4;
   };
 
   handlePress = (level) => {
@@ -43,28 +44,31 @@ class SelectableSmileys extends React.PureComponent {
           <FontAwesomeIcon
             style={{
               opacity: this.determineOpacity(0),
+              color: Colors.pidzRed,
             }}
             icon="frown"
-            size={20}
+            size={30}
           />
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => this.handlePress(1)}>
           <FontAwesomeIcon
             style={{
               opacity: this.determineOpacity(1),
-              marginLeft: 4,
+              marginLeft: 7,
+              color: Colors.pidzOrange,
             }}
             icon="meh"
-            size={20}
+            size={30}
           />
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => this.handlePress(2)}>
           <FontAwesomeIcon
             style={{
               opacity: this.determineOpacity(2),
-              marginLeft: 4,
+              marginLeft: 7,
+              color: Colors.pidzGreen,
             }}
-            size={20}
+            size={30}
             icon="smile"
           />
         </TouchableWithoutFeedback>

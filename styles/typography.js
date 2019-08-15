@@ -1,8 +1,8 @@
 import * as Colors from './colors';
 
-export const extraLargeFontSize = 32;
-export const largeFontSize = 22;
-export const buttonFontSize = 18;
+export const hugeFontSize = 32;
+export const extraLargeFontSize = 22;
+export const largeFontSize = 18;
 export const baseFontSize = 16;
 export const smallFontSize = 14;
 export const smallestFontSize = 10;
@@ -34,8 +34,14 @@ export const fatBodyText = {
 
 export const headerText = {
   color: Colors.pidzHeading,
-  fontSize: largeFontSize,
+  fontSize: hugeFontSize,
   fontWeight: 'bold',
+};
+
+export const headingText = {
+  color: Colors.pidzHeading,
+  fontSize: largeFontSize,
+  fontWeight: '100',
 };
 
 export const userCardText = {

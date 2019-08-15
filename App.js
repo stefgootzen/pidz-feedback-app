@@ -33,7 +33,7 @@ const MainNavigator = createStackNavigator({
   },
 },
 {
-  initialRouteName: 'Selection',
+  initialRouteName: 'Factors',
   transitionConfig: () => fromRight(),
 });
 

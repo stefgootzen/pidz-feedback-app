@@ -21,8 +21,8 @@ const FlatListItemSeperator = styled.View`
   background-color: ${Colors.pidzBackground};
 `;
 
-const ThinBodyText = styled.Text`
-  ${Typography.thinBodyText};
+const HeadingText = styled.Text`
+  ${Typography.headingText};
   margin-bottom: ${Spacing.base};
 `;
 
@@ -40,7 +40,7 @@ class Selection extends React.Component {
   render() {
     return (
       <Wrapper>
-        <ThinBodyText>Over wie wil je vandaag iets vertellen?</ThinBodyText>
+        <HeadingText>Over wie wil je vandaag iets vertellen?</HeadingText>
         <FlatList
           data={employees}
           keyExtractor={item => item.id.toString()}

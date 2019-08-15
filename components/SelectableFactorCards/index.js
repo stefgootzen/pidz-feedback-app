@@ -10,6 +10,7 @@ import { btnGroupBoolToYesNo, btnGroupYesNoToBool } from '../../utils/btnGroupYe
 const FlexRow = styled(View)`
   display: flex;
   flex-direction: row;
+  margin-bottom: 3px;
 `;
 
 const Card = styled(FlexRow)`
@@ -18,10 +19,7 @@ const Card = styled(FlexRow)`
   margin-bottom: ${Spacing.small}px;
   border-radius: 5px;
   display: flex;
-`;
-
-const FatBodyText = styled(Text)`
-  ${Typography.fatBodyText};
+  flex-direction: column;
 `;
 
 const BodyText = styled(Text)`
@@ -38,7 +36,16 @@ const TwoThird = styled(View)`
   flex: 2;
   justify-content: center;
   padding-left:10px;
-  opacity: ${props => (props.disabled ? 0.2 : 1)}
+  opacity: ${props => (props.disabled ? 0 : 1)}
+`;
+
+const FlexWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+`;
+
+const FatBodyText = styled.Text`
+  ${Typography.fatBodyText};
 `;
 
 class SelectableFactorCards extends React.PureComponent {
@@ -88,30 +95,32 @@ class SelectableFactorCards extends React.PureComponent {
       <View>
         <FlexRow>
           <OneThird>
-            <BodyText>Relevant</BodyText>
+            <FatBodyText>Relevant</FatBodyText>
           </OneThird>
           <TwoThird>
-            <BodyText>Beoordeling</BodyText>
+            <FatBodyText>Beoordeling</FatBodyText>
           </TwoThird>
         </FlexRow>
         {
           values.map(factor => (
             <Card key={factor.name}>
-              <OneThird>
-                <ButtonGroup
-                  onPress={value => this.handleButtonGroupChange(factor.name, value)}
-                  selectedIndex={btnGroupBoolToYesNo(factor.relevant)}
-                  buttons={['Ja', 'Nee']}
-                />
-              </OneThird>
-              <TwoThird disabled={!factor.relevant}>
-                <BodyText>{factor.name}</BodyText>
-                <SelectableSmileys
-                  isDisabled={!factor.relevant}
-                  handleChange={value => this.handleLevelChange(factor.name, value)}
-                  currentLevel={factor.level}
-                />
-              </TwoThird>
+              <BodyText>{factor.name}</BodyText>
+              <FlexWrapper>
+                <OneThird>
+                  <ButtonGroup
+                    onPress={value => this.handleButtonGroupChange(factor.name, value)}
+                    selectedIndex={btnGroupBoolToYesNo(factor.relevant)}
+                    buttons={['Ja', 'Nee']}
+                  />
+                </OneThird>
+                <TwoThird disabled={!factor.relevant}>
+                  <SelectableSmileys
+                    isDisabled={!factor.relevant}
+                    handleChange={value => this.handleLevelChange(factor.name, value)}
+                    currentLevel={factor.level}
+                  />
+                </TwoThird>
+              </FlexWrapper>
             </Card>
           ))
         }

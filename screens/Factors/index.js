@@ -23,8 +23,9 @@ const ButtonWrapper = styled.View`
   padding-top: 10px;
 `;
 
-const BodyText = styled.Text`
-  ${Typography.fatBodyText};
+const HeadingText = styled.Text`
+  ${Typography.headingText};
+  margin-bottom: ${Spacing.base};
 `;
 
 const initialFactors = factors.map(factor => ({
@@ -61,7 +62,7 @@ class Factors extends React.PureComponent {
         {props => (
           <StyledKeyboardAvoidingView behavior="padding" enabled keyboardVerticalOffset={100}>
             <ScrollView>
-              <BodyText>{`Hoe presteert ${subjectName} op de onderstaande competenties?`}</BodyText>
+              <HeadingText>{`Hoe presteert ${subjectName} op de onderstaande competenties?`}</HeadingText>
               <SelectableFactorCards
                 onChange={value => props.setFieldValue('factors', value)}
                 name="factors"

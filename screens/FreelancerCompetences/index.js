@@ -20,8 +20,13 @@ const FullHeightView = styled.View`
   height: 100%;
 `;
 
-const ThinBodyText = styled.Text`
-  ${Typography.ThinBodyText};
+const FatBodyText = styled.Text`
+  ${Typography.fatBodyText};
+`;
+
+const HeadingText = styled.Text`
+  ${Typography.headingText};
+  margin-bottom: ${Spacing.base};
 `;
 
 class FreelancerCompetences extends React.Component {
@@ -72,8 +77,8 @@ class FreelancerCompetences extends React.Component {
         >
           {props => (
             <FullHeightView>
-              <ThinBodyText>{`Hoe presteert ${subjectName} op de onderstaande competentie?`}</ThinBodyText>
-              <ThinBodyText>{currentCompetenceName}</ThinBodyText>
+              <HeadingText>{`Hoe presteert ${subjectName} op de onderstaande competentie?`}</HeadingText>
+              <FatBodyText>{currentCompetenceName}</FatBodyText>
               <SelectableCards
                 competence={currentCompetenceInfo}
                 selectedLevel={props.values[currentCompetenceName]}
@@ -83,8 +88,8 @@ class FreelancerCompetences extends React.Component {
                 onPress={props.handleSubmit}
                 title="Volgende"
                 disabled={
-                    !Object.prototype.hasOwnProperty.call(props.values, currentCompetenceName)
-                  }
+                  !Object.prototype.hasOwnProperty.call(props.values, currentCompetenceName)
+                }
               />
             </FullHeightView>
           )}

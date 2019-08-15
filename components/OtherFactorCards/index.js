@@ -26,21 +26,17 @@ const FatBodyText = styled(Text)`
   ${Typography.fatBodyText};
 `;
 
-const BodyText = styled(Text)`
-  ${Typography.bodyText};
-  margin-bottom: 2px;
-`;
-
 const OneThird = styled(View)`
   flex: 1;
-  flex-direction: row;
   justify-content: center;
 `;
 
 const TwoThird = styled(View)`
   flex: 2;
-  justify-content: center;
-  padding-left:10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
   opacity: ${props => (props.disabled ? 0.2 : 1)}
 `;
 
@@ -146,32 +142,30 @@ class OtherFactorCards extends React.PureComponent {
             title="Toevoegen"
           />
         </FlexRow>
-
         {
-        values.map(factor => (
-          <Card key={factor.id}>
-            <TwoThird>
-              <Text>{factor.name}</Text>
-            </TwoThird>
-            <OneThird>
-              <SelectableSmileys
-                handleChange={value => this.handleLevelChange(factor.id, value)}
-                currentLevel={factor.level}
-              />
-              <TouchableWithoutFeedback onPress={() => this.removeFactor(factor.id)}>
-                <FontAwesomeIcon
-                  style={{
-                    marginLeft: 12,
-                  }}
-                  size={20}
-                  icon="trash"
+          values.map(factor => (
+            <Card key={factor.id}>
+              <OneThird>
+                <Text>{factor.name}</Text>
+              </OneThird>
+              <TwoThird>
+                <SelectableSmileys
+                  handleChange={value => this.handleLevelChange(factor.id, value)}
+                  currentLevel={factor.level}
                 />
-              </TouchableWithoutFeedback>
-            </OneThird>
-
-          </Card>
-        ))
-      }
+                <TouchableWithoutFeedback onPress={() => this.removeFactor(factor.id)}>
+                  <FontAwesomeIcon
+                    style={{
+                      marginLeft: 12,
+                    }}
+                    size={20}
+                    icon="trash"
+                  />
+                </TouchableWithoutFeedback>
+              </TwoThird>
+            </Card>
+          ))
+        }
       </View>
     );
   }
