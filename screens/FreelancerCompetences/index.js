@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Header from '../../components/Header';
+import MaybeShowOnboarding from '../../components/MaybeShowOnboarding';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setFreelancerCompetence } from '../../actions/formActions';
 import Button from '../../components/Button';
@@ -69,6 +70,7 @@ class FreelancerCompetences extends React.Component {
     const currentCompetenceName = currentCompetenceInfo.name;
     return (
       <Wrapper>
+        <MaybeShowOnboarding onboardingId="freelancerCompetences" />
         <Formik
           onSubmit={(competence) => {
             setFreelancerCompetence(competence);

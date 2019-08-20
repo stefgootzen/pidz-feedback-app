@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Button from '../../components/Button';
+import MaybeShowOnboarding from '../../components/MaybeShowOnboarding';
 import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setSuitability } from '../../actions/formActions';
@@ -25,53 +26,62 @@ const ThinBodyText = styled.Text`
   ${Typography.ThinBodyText};
 `;
 
-const Suitability = ({ setSuitability, navigation, subjectName }) => (
-  <Wrapper>
-    <Formik
-      initialValues={{ clarification: '', suitable: 0 }}
-      onSubmit={(values) => {
-        const isSuitable = btnGroupYesNoToBool(values.suitable);
+const Suitability = (props) => {
+  const {
+    setSuitability,
+    navigation,
+    subjectName,
+  } = props;
 
-        const clarification = values.clarification.length === 0 ? null : values.clarification;
+  return (
+    <Wrapper>
+      <MaybeShowOnboarding onboardingId="suitability" />
+      <Formik
+        initialValues={{ clarification: '', suitable: 0 }}
+        onSubmit={(values) => {
+          const isSuitable = btnGroupYesNoToBool(values.suitable);
 
-        const suitableForDepartment = {
-          isSuitable,
-          clarification,
-        };
+          const clarification = values.clarification.length === 0 ? null : values.clarification;
 
-        setSuitability(suitableForDepartment);
-        navigation.navigate('FreelancerCompetences');
-      }}
-    >
-      {props => (
-        <FullHeightView>
-          <ThinBodyText>{`Vind je ${subjectName} geschikt om op deze afdeling te werken?`}</ThinBodyText>
-          <ButtonGroup
-            onPress={value => props.setFieldValue('suitable', value)}
-            selectedIndex={props.values.suitable}
-            buttons={['Ja', 'Nee']}
-            value={props.values.suitable} // TODO: check if this is needed
-            onBlur={() => props.setFieldTouched('suitable')}
-            errorMessage={
-              props.touched.suitable && props.errors.suitable ? props.errors.suitable : undefined
-            }
-          />
-          <ThinBodyText>Toelichting</ThinBodyText>
-          <StyledTextInput
-            onChangeText={props.handleChange('clarification')}
-            onBlur={props.handleBlur('clarification')}
-            value={props.values.clarification}
-            underlineColorAndroid={Colors.darkGrey}
-          />
-          <Button
-            onPress={props.handleSubmit}
-            title="Volgende"
-          />
-        </FullHeightView>
-      )}
-    </Formik>
-  </Wrapper>
-);
+          const suitableForDepartment = {
+            isSuitable,
+            clarification,
+          };
+
+          setSuitability(suitableForDepartment);
+          navigation.navigate('FreelancerCompetences');
+        }}
+      >
+        {props => (
+          <FullHeightView>
+            <ThinBodyText>{`Vind je ${subjectName} geschikt om op deze afdeling te werken?`}</ThinBodyText>
+            <ButtonGroup
+              onPress={value => props.setFieldValue('suitable', value)}
+              selectedIndex={props.values.suitable}
+              buttons={['Ja', 'Nee']}
+              value={props.values.suitable} // TODO: check if this is needed
+              onBlur={() => props.setFieldTouched('suitable')}
+              errorMessage={
+                props.touched.suitable && props.errors.suitable ? props.errors.suitable : undefined
+              }
+            />
+            <ThinBodyText>Toelichting</ThinBodyText>
+            <StyledTextInput
+              onChangeText={props.handleChange('clarification')}
+              onBlur={props.handleBlur('clarification')}
+              value={props.values.clarification}
+              underlineColorAndroid={Colors.darkGrey}
+            />
+            <Button
+              onPress={props.handleSubmit}
+              title="Volgende"
+            />
+          </FullHeightView>
+        )}
+      </Formik>
+    </Wrapper>
+  );
+};
 
 Suitability.navigationOptions = {
   header: <Header>Feedback</Header>,

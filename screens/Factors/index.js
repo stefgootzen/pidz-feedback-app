@@ -5,6 +5,7 @@ import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Header from '../../components/Header';
+import MaybeShowOnboarding from '../../components/MaybeShowOnboarding';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setFactors, setOtherFactors } from '../../actions/formActions';
 import Button from '../../components/Button';
@@ -61,6 +62,7 @@ class Factors extends React.PureComponent {
       >
         {props => (
           <StyledKeyboardAvoidingView behavior="padding" enabled keyboardVerticalOffset={100}>
+            <MaybeShowOnboarding onboardingId="factors" />
             <ScrollView>
               <HeadingText>{`Hoe presteert ${subjectName} op de onderstaande competenties?`}</HeadingText>
               <SelectableFactorCards

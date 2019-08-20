@@ -1,0 +1,20 @@
+{
+  "suitability": {
+    "step": "1",
+    "title": "Beoordeel de match",
+    "description": "Geef een duidelijke voorkeur aan bij je planner om deze ZZP' er wel of niet opnieuw in te plannen.",
+    "image": null
+  },
+  "freelancerCompetences": {
+    "step": "2",
+    "title": "Beoordeel zorgcompetenties",
+    "description": "Help de PIDZ'er om een betere ZZP'er te worden om zo het zorglandschap te verbeteren.",
+    "image": null
+  },
+  "factors": {
+    "step": "3",
+    "title": "Beoordeel afdelingscompetenties",
+    "description": "Beoordeel op wat jij en je collega's belangrijk vinden zodat de planner een passende PIDZ'er kan inzetten",
+    "image": null
+  }
+}
