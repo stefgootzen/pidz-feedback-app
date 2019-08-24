@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { Colors, Spacing } from '../../styles';
 
 const Button = styled(NativeButton).attrs({
+  disabledStyle: {
+    opacity: 0.5,
+  },
   containerStyle: {
     marginTop: 'auto',
     marginBottom: Spacing.small,
