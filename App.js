@@ -22,7 +22,6 @@ const AuthStack = createStackNavigator({
   Login: {
     screen: Login,
   },
-
 });
 
 const MainStack = createStackNavigator({
@@ -53,10 +52,6 @@ const Routes = createSwitchNavigator({
 });
 
 const AppContainer = createAppContainer(Routes);
-
-console.log('hier is de info');
-console.log(store);
-console.log(persistor);
 
 const App = () => (
   <Provider store={store}>

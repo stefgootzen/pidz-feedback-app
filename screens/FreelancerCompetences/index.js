@@ -8,8 +8,8 @@ import MaybeShowOnboarding from '../../components/MaybeShowOnboarding';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setFreelancerCompetence } from '../../actions/formActions';
 import Button from '../../components/Button';
-import freelancerCompetencesInfo from './freelancerCompetences';
 import SelectableCards from '../../components/SelectableCards';
+import axiosInstance from '../../utils/axios';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -31,11 +31,25 @@ const HeadingText = styled.Text`
 `;
 
 class FreelancerCompetences extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentCompetenceIndex: 0,
-    };
+  state = {
+    currentCompetenceIndex: 0,
+    competences: [],
+  };
+
+  async componentDidMount() {
+    try {
+      const {
+        data: competences,
+      } = await axiosInstance.get('/competences');
+
+      console.log(competences);
+
+      this.setState({
+        competences,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   determineNextStep = () => {
@@ -45,9 +59,10 @@ class FreelancerCompetences extends React.Component {
 
     const {
       currentCompetenceIndex,
+      competences,
     } = this.state;
 
-    if (currentCompetenceIndex === freelancerCompetencesInfo.length - 1) {
+    if (currentCompetenceIndex === competences.length - 1) {
       navigation.navigate('Factors');
     } else {
       this.setState(prevState => ({
@@ -58,28 +73,40 @@ class FreelancerCompetences extends React.Component {
 
   render() {
     const {
-      subjectName,
+      freelancerName,
       setFreelancerCompetence,
     } = this.props;
 
     const {
       currentCompetenceIndex,
+      competences,
     } = this.state;
 
-    const currentCompetenceInfo = freelancerCompetencesInfo[currentCompetenceIndex];
+    if (competences.length === 0) {
+      return null;
+    }
+
+    const currentCompetenceInfo = competences[currentCompetenceIndex];
     const currentCompetenceName = currentCompetenceInfo.name;
+
     return (
       <Wrapper>
         <MaybeShowOnboarding onboardingId="freelancerCompetences" />
         <Formik
           onSubmit={(competence) => {
-            setFreelancerCompetence(competence);
+            console.log(competence);
+            const data = {
+              id: currentCompetenceInfo.id,
+              level: competence[currentCompetenceName],
+            };
+
+            setFreelancerCompetence(data);
             this.determineNextStep(competence);
           }}
         >
           {props => (
             <FullHeightView>
-              <HeadingText>{`Hoe presteert ${subjectName} op de onderstaande competentie?`}</HeadingText>
+              <HeadingText>{`Hoe presteert ${freelancerName} op de onderstaande competentie?`}</HeadingText>
               <FatBodyText>{currentCompetenceName}</FatBodyText>
               <SelectableCards
                 competence={currentCompetenceInfo}
@@ -107,15 +134,15 @@ FreelancerCompetences.navigationOptions = {
 
 FreelancerCompetences.propTypes = {
   navigation: PropTypes.shape().isRequired,
-  subjectName: PropTypes.string,
+  freelancerName: PropTypes.string,
 };
 
 FreelancerCompetences.defaultProps = {
-  subjectName: null,
+  freelancerName: null,
 };
 
 const mapStateToProps = state => ({
-  subjectName: state.form.subject.name,
+  freelancerName: state.form.freelancer.name,
 });
 
 const mapDispatchToProps = dispatch => ({

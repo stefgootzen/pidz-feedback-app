@@ -30,7 +30,7 @@ const Suitability = (props) => {
   const {
     setSuitability,
     navigation,
-    subjectName,
+    freelancerName,
   } = props;
 
   return (
@@ -54,7 +54,7 @@ const Suitability = (props) => {
       >
         {props => (
           <FullHeightView>
-            <ThinBodyText>{`Vind je ${subjectName} geschikt om op deze afdeling te werken?`}</ThinBodyText>
+            <ThinBodyText>{`Vind je ${freelancerName} geschikt om op deze afdeling te werken?`}</ThinBodyText>
             <ButtonGroup
               onPress={value => props.setFieldValue('suitable', value)}
               selectedIndex={props.values.suitable}
@@ -89,15 +89,15 @@ Suitability.navigationOptions = {
 
 Suitability.propTypes = {
   navigation: PropTypes.shape().isRequired,
-  subjectName: PropTypes.string,
+  freelancerName: PropTypes.string,
 };
 
 Suitability.defaultProps = {
-  subjectName: null,
+  freelancerName: null,
 };
 
 const mapStateToProps = state => ({
-  subjectName: state.form.subject.name,
+  freelancerName: state.form.freelancer.name,
 });
 
 const mapDispatchToProps = dispatch => ({

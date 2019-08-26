@@ -1,9 +1,13 @@
 import {
-  SET_FACTORS, SET_FREELANCER_COMPETENCE, SET_OTHER_FACTORS, SET_SUBJECT, SET_SUITABILITY,
+  SET_DEPARTMENT, SET_FACTORS, SET_FREELANCER_COMPETENCE, SET_OTHER_FACTORS, SET_FREELANCER,
+  SET_SUITABILITY,
 } from '../actions/types';
 
 const initialState = {
-  subject: {
+  department: {
+    id: null,
+  },
+  freelancer: {
     id: null,
     name: null,
   },
@@ -11,18 +15,26 @@ const initialState = {
     isSuitable: null,
     clarification: null,
   },
-  freelancerCompetences: null,
+  freelancerCompetences: [],
   factors: null,
   otherFactors: null,
 };
 
 const formReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_SUBJECT:
+    case SET_DEPARTMENT:
       return {
         ...state,
-        subject: {
-          ...state.subject,
+        department: {
+          ...state.department,
+          id: action.payload,
+        },
+      };
+    case SET_FREELANCER:
+      return {
+        ...state,
+        freelancer: {
+          ...state.freelancer,
           id: action.payload.id,
           name: action.payload.name,
         },
@@ -39,10 +51,10 @@ const formReducer = (state = initialState, action) => {
     case SET_FREELANCER_COMPETENCE:
       return {
         ...state,
-        freelancerCompetences: {
+        freelancerCompetences: [
           ...state.freelancerCompetences,
-          ...action.payload,
-        },
+          action.payload,
+        ],
       };
     case SET_FACTORS:
       return {

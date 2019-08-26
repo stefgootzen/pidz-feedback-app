@@ -9,9 +9,9 @@ import MaybeShowOnboarding from '../../components/MaybeShowOnboarding';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setFactors, setOtherFactors } from '../../actions/formActions';
 import Button from '../../components/Button';
-import factors from './factors';
 import SelectableFactorCards from '../../components/SelectableFactorCards';
 import OtherFactorCards from '../../components/OtherFactorCards';
+import axiosInstance from '../../utils/axios';
 
 const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
   ${Spacing.sectionPadding};
@@ -29,20 +29,51 @@ const HeadingText = styled.Text`
   margin-bottom: ${Spacing.base};
 `;
 
-const initialFactors = factors.map(factor => ({
-  name: factor,
-  relevant: false,
-  level: null,
-}));
-
 class Factors extends React.PureComponent {
+  state = {
+    initialFactors: [],
+  };
+
+  async componentDidMount() {
+    const {
+      departmentId,
+    } = this.props;
+
+    try {
+      const {
+        data: factors,
+      } = await axiosInstance.get(`/factors?departmentId=${departmentId}`);
+
+      const initialFactors = factors.map(factor => ({
+        id: factor.id,
+        name: factor.name,
+        relevant: false,
+        level: null,
+      }));
+
+      this.setState({
+        initialFactors,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   render() {
     const {
-      subjectName,
+      freelancerName,
       navigation,
       setFactors,
       setOtherFactors,
     } = this.props;
+
+    const {
+      initialFactors,
+    } = this.state;
+
+    if (initialFactors.length === 0) {
+      return null;
+    }
 
     return (
       <Formik
@@ -50,13 +81,22 @@ class Factors extends React.PureComponent {
           factors: initialFactors,
           otherFactors: [],
         }}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           setFactors(values.factors);
 
           // If user inserted other factors, also call setOtherFactors
           if (values.otherFactors.length >= 1) {
             setOtherFactors(values.otherFactors);
           }
+
+          const {
+            review,
+          } = this.props;
+
+          console.log(review);
+
+          await axiosInstance.put('/reviews', review);
+
           navigation.navigate('Closing');
         }}
       >
@@ -64,7 +104,7 @@ class Factors extends React.PureComponent {
           <StyledKeyboardAvoidingView behavior="padding" enabled keyboardVerticalOffset={100}>
             <MaybeShowOnboarding onboardingId="factors" />
             <ScrollView>
-              <HeadingText>{`Hoe presteert ${subjectName} op de onderstaande competenties?`}</HeadingText>
+              <HeadingText>{`Hoe presteert ${freelancerName} op de onderstaande competenties?`}</HeadingText>
               <SelectableFactorCards
                 onChange={value => props.setFieldValue('factors', value)}
                 name="factors"
@@ -95,15 +135,17 @@ Factors.navigationOptions = {
 
 Factors.propTypes = {
   navigation: PropTypes.shape().isRequired,
-  subjectName: PropTypes.string,
+  freelancerName: PropTypes.string,
 };
 
 Factors.defaultProps = {
-  subjectName: null,
+  freelancerName: null,
 };
 
 const mapStateToProps = state => ({
-  subjectName: state.form.subject.name,
+  review: state.form,
+  departmentId: state.form.department.id,
+  freelancerName: state.form.freelancer.name,
 });
 
 const mapDispatchToProps = dispatch => ({

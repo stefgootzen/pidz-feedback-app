@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FlatList, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
-import { setSubject } from '../../actions/formActions';
+import { setFreelancer } from '../../actions/formActions';
 import Header from '../../components/Header';
 import employees from './employees.json';
 import UserCard from '../../components/UserCard';
 import { Colors, Spacing, Typography } from '../../styles';
+import axiosInstance from '../../utils/axios';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -27,22 +28,44 @@ const HeadingText = styled.Text`
 `;
 
 class Selection extends React.Component {
+  state = {
+    freelancers: [],
+  };
+
+  async componentDidMount() {
+    try {
+      const {
+        data: freelancers,
+      } = await axiosInstance.get('/freelancers');
+
+      this.setState({
+        freelancers,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   handleClick = (values) => {
     const {
-      setSubject,
+      setFreelancer,
       navigation,
     } = this.props;
 
-    setSubject(values);
+    setFreelancer(values);
     navigation.navigate('Suitability');
   };
 
   render() {
+    const {
+      freelancers,
+    } = this.state;
+
     return (
       <Wrapper>
         <HeadingText>Over wie wil je vandaag iets vertellen?</HeadingText>
         <FlatList
-          data={employees}
+          data={freelancers}
           keyExtractor={item => item.id.toString()}
           ItemSeparatorComponent={() => <FlatListItemSeperator />}
           renderItem={({ item }) => (
@@ -60,16 +83,16 @@ class Selection extends React.Component {
 }
 
 Selection.navigationOptions = {
-  header: <Header>Hallo Guus!</Header>,
+  header: <Header>Hallo!</Header>,
 };
 
 const mapDispatchToProps = dispatch => ({
-  setSubject: subject => dispatch(setSubject(subject)),
+  setFreelancer: subject => dispatch(setFreelancer(subject)),
 });
 
 Selection.propTypes = {
   navigation: PropTypes.shape().isRequired,
-  setSubject: PropTypes.func.isRequired,
+  setFreelancer: PropTypes.func.isRequired,
 };
 
 export default connect(

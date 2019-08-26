@@ -9,6 +9,7 @@ import { Formik } from 'formik';
 import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setJwt } from '../../actions/jwtActions';
+import { setDepartment } from '../../actions/formActions';
 import Button from '../../components/Button';
 import StyledTextInput from '../../components/StyledTextInput';
 import axiosInstance, { setAuthorizationHeader } from '../../utils/axios';
@@ -86,18 +87,19 @@ class Login extends React.PureComponent {
         }}
         onSubmit={async (values) => {
           const {
+            setDepartment,
             setJwt,
             navigation,
           } = this.props;
 
           const {
             password,
-            department,
+            department: departmentId,
           } = values;
 
           const body = {
             password,
-            department,
+            departmentId,
           };
 
           try {
@@ -111,6 +113,7 @@ class Login extends React.PureComponent {
               error: null,
             });
 
+            await setDepartment(departmentId);
             await setJwt(jwt);
             setAuthorizationHeader(jwt);
             navigation.navigate('Selection');
@@ -196,6 +199,7 @@ Login.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   setJwt: values => dispatch(setJwt(values)),
+  setDepartment: values => dispatch(setDepartment(values)),
 });
 
 export default connect(
