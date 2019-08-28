@@ -10,6 +10,8 @@ const axiosInstance = axios.create(config);
 
 const setAuthorizationHeader = (token) => {
   axiosInstance.defaults.headers.common.Authorization = token;
+  console.log('defaults set');
+  console.log(axiosInstance.defaults.headers.common.Authorization);
 };
 
 const removeAuthorizationHeader = () => {

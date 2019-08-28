@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Button from '../../components/Button';
-import MaybeShowOnboarding from '../../components/MaybeShowOnboarding';
 import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setSuitability } from '../../actions/formActions';
 import ButtonGroup from '../../components/ButtonGroup';
 import { btnGroupYesNoToBool } from '../../utils/btnGroupYesNoToBool';
 import StyledTextInput from '../../components/StyledTextInput';
+import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -35,7 +35,6 @@ const Suitability = (props) => {
 
   return (
     <Wrapper>
-      <MaybeShowOnboarding onboardingId="suitability" />
       <Formik
         initialValues={{ clarification: '', suitable: 0 }}
         onSubmit={(values) => {
@@ -49,7 +48,7 @@ const Suitability = (props) => {
           };
 
           setSuitability(suitableForDepartment);
-          navigation.navigate('FreelancerCompetences');
+          navigateWithOnboarding(navigation, 'FreelancerCompetences');
         }}
       >
         {props => (

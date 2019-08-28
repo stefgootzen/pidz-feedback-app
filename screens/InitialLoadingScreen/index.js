@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View, ActivityIndicator } from 'react-native';
 import axiosInstance, { globalErrorHandler, setAuthorizationHeader } from '../../utils/axios';
+import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
 
 
 class InitialLoadingScreen extends React.Component {
@@ -27,7 +28,7 @@ class InitialLoadingScreen extends React.Component {
         } = await axiosInstance.get('/auth/verify');
 
         if (verified) {
-          return navigation.navigate('Selection');
+          return navigateWithOnboarding(navigation, 'Selection');
         }
       } catch (error) {
         globalErrorHandler(error);

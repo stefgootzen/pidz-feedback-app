@@ -9,6 +9,7 @@ import Header from '../../components/Header';
 import UserCard from '../../components/UserCard';
 import { Colors, Spacing, Typography } from '../../styles';
 import axiosInstance, { globalErrorHandler } from '../../utils/axios';
+import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -37,8 +38,10 @@ class Selection extends React.Component {
   }
 
   componentDidMount() {
+    console.log('componentDidMount');
     axiosInstance.get('/freelancers')
       .then(({ data: freelancers }) => {
+        console.log(freelancers);
         this.setState({
           freelancers,
         });
@@ -53,7 +56,7 @@ class Selection extends React.Component {
     } = this.props;
 
     setFreelancer(values);
-    navigation.navigate('Suitability');
+    navigateWithOnboarding(navigation, 'Suitability');
   };
 
   render() {

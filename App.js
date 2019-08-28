@@ -13,6 +13,7 @@ import ErrorShower from './components/ErrorShower';
 import Selection from './screens/Selection';
 import Closing from './screens/Closing';
 import Factors from './screens/Factors';
+import Onboarding from './screens/Onboarding';
 import InitialLoadingScreen from './screens/InitialLoadingScreen';
 import Login from './screens/Login';
 import FreelancerCompetences from './screens/FreelancerCompetences';
@@ -41,6 +42,9 @@ const MainStack = createStackNavigator({
   },
   Closing: {
     screen: Closing,
+  },
+  Onboarding: {
+    screen: Onboarding,
   },
 });
 

@@ -5,13 +5,13 @@ import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Header from '../../components/Header';
-import MaybeShowOnboarding from '../../components/MaybeShowOnboarding';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setFactors, setOtherFactors } from '../../actions/formActions';
 import Button from '../../components/Button';
 import SelectableFactorCards from '../../components/SelectableFactorCards';
 import OtherFactorCards from '../../components/OtherFactorCards';
 import axiosInstance, { globalErrorHandler } from '../../utils/axios';
+import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
 
 const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
   ${Spacing.sectionPadding};
@@ -77,7 +77,7 @@ class Factors extends React.PureComponent {
           factors: initialFactors,
           otherFactors: [],
         }}
-        onSubmit={async (values) => {
+        onSubmit={(values) => {
           setFactors(values.factors);
 
           // If user inserted other factors, also call setOtherFactors
@@ -85,18 +85,11 @@ class Factors extends React.PureComponent {
             setOtherFactors(values.otherFactors);
           }
 
-          const {
-            review,
-          } = this.props;
-
-          await axiosInstance.put('/reviews', review);
-
-          navigation.navigate('Closing');
+          navigateWithOnboarding(navigation, 'Closing');
         }}
       >
         {props => (
           <StyledKeyboardAvoidingView behavior="padding" enabled keyboardVerticalOffset={100}>
-            <MaybeShowOnboarding onboardingId="factors" />
             <ScrollView>
               <HeadingText>{`Hoe presteert ${freelancerName} op de onderstaande competenties?`}</HeadingText>
               <SelectableFactorCards
@@ -137,7 +130,6 @@ Factors.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  review: state.form,
   departmentId: state.form.department.id,
   freelancerName: state.form.freelancer.name,
 });

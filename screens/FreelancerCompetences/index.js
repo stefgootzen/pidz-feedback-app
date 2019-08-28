@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Header from '../../components/Header';
-import MaybeShowOnboarding from '../../components/MaybeShowOnboarding';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setFreelancerCompetence } from '../../actions/formActions';
 import Button from '../../components/Button';
 import SelectableCards from '../../components/SelectableCards';
 import axiosInstance, { globalErrorHandler } from '../../utils/axios';
+import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -57,7 +57,7 @@ class FreelancerCompetences extends React.Component {
     } = this.state;
 
     if (currentCompetenceIndex === competences.length - 1) {
-      navigation.navigate('Factors');
+      navigateWithOnboarding(navigation, 'Factors');
     } else {
       this.setState(prevState => ({
         currentCompetenceIndex: prevState.currentCompetenceIndex + 1,
@@ -85,7 +85,6 @@ class FreelancerCompetences extends React.Component {
 
     return (
       <Wrapper>
-        <MaybeShowOnboarding onboardingId="freelancerCompetences" />
         <Formik
           onSubmit={(competence) => {
             const data = {

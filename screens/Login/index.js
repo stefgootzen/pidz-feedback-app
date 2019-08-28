@@ -13,6 +13,7 @@ import { setDepartment } from '../../actions/formActions';
 import Button from '../../components/Button';
 import StyledTextInput from '../../components/StyledTextInput';
 import axiosInstance, { globalErrorHandler, setAuthorizationHeader } from '../../utils/axios';
+import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
 
 const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
   ${Spacing.sectionPadding};
@@ -55,7 +56,7 @@ class Login extends React.PureComponent {
       .catch(globalErrorHandler);
   }
 
-  handleSubmit = async (values) => {
+  handleSubmit = (values) => {
     const {
       setDepartment,
       setJwt,
@@ -72,26 +73,26 @@ class Login extends React.PureComponent {
       departmentId,
     };
 
-    try {
-      const {
-        data: {
-          jwt,
-        },
-      } = await axiosInstance.post('/auth/signin', body);
+    axiosInstance.post('/auth/signin', body)
+      .then(({ data: { jwt } }) => {
+        this.setState({
+          error: null,
+        });
 
-      this.setState({
-        error: null,
-      });
+        this.setState({
+          error: null,
+        });
 
-      await setDepartment(departmentId);
-      await setJwt(jwt);
-      setAuthorizationHeader(jwt);
-      navigation.navigate('Selection');
-    } catch (error) {
-      this.setState({
-        error: error.message,
+        setDepartment(departmentId);
+        setJwt(jwt);
+        setAuthorizationHeader(jwt);
+        navigateWithOnboarding(navigation, 'Selection');
+      })
+      .catch((error) => {
+        this.setState({
+          error: error.message,
+        });
       });
-    }
   };
 
   handleOrganisationChange = async (value) => {
