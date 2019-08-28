@@ -55,6 +55,45 @@ class Login extends React.PureComponent {
       .catch(globalErrorHandler);
   }
 
+  handleSubmit = async (values) => {
+    const {
+      setDepartment,
+      setJwt,
+      navigation,
+    } = this.props;
+
+    const {
+      password,
+      department: departmentId,
+    } = values;
+
+    const body = {
+      password,
+      departmentId,
+    };
+
+    try {
+      const {
+        data: {
+          jwt,
+        },
+      } = await axiosInstance.post('/auth/signin', body);
+
+      this.setState({
+        error: null,
+      });
+
+      await setDepartment(departmentId);
+      await setJwt(jwt);
+      setAuthorizationHeader(jwt);
+      navigation.navigate('Selection');
+    } catch (error) {
+      this.setState({
+        error: error.message,
+      });
+    }
+  };
+
   handleOrganisationChange = async (value) => {
     try {
       const {
@@ -81,44 +120,7 @@ class Login extends React.PureComponent {
         initialValues={{
           password: '',
         }}
-        onSubmit={async (values) => {
-          const {
-            setDepartment,
-            setJwt,
-            navigation,
-          } = this.props;
-
-          const {
-            password,
-            department: departmentId,
-          } = values;
-
-          const body = {
-            password,
-            departmentId,
-          };
-
-          try {
-            const {
-              data: {
-                jwt,
-              },
-            } = await axiosInstance.post('/auth/signin', body);
-
-            this.setState({
-              error: null,
-            });
-
-            await setDepartment(departmentId);
-            await setJwt(jwt);
-            setAuthorizationHeader(jwt);
-            navigation.navigate('Selection');
-          } catch (error) {
-            this.setState({
-              error: error.message,
-            });
-          }
-        }}
+        onSubmit={this.handleSubmit}
       >
         {props => (
           <StyledKeyboardAvoidingView behavior="padding" enabled keyboardVerticalOffset={100}>
@@ -186,7 +188,7 @@ class Login extends React.PureComponent {
 }
 
 Login.navigationOptions = {
-  header: <Header title="Login" />,
+  header: <Header title="Inloggen" />,
 };
 
 Login.propTypes = {
