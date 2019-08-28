@@ -12,7 +12,7 @@ import { setJwt } from '../../actions/jwtActions';
 import { setDepartment } from '../../actions/formActions';
 import Button from '../../components/Button';
 import StyledTextInput from '../../components/StyledTextInput';
-import axiosInstance, { setAuthorizationHeader } from '../../utils/axios';
+import axiosInstance, { globalErrorHandler, setAuthorizationHeader } from '../../utils/axios';
 
 const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
   ${Spacing.sectionPadding};
@@ -45,18 +45,14 @@ class Login extends React.PureComponent {
     };
   }
 
-  async componentDidMount() {
-    try {
-      const {
-        data: organisations,
-      } = await axiosInstance.get('/organisations');
-
-      this.setState({
-        organisations,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  componentDidMount() {
+    axiosInstance.get('/organisations')
+      .then(({ data: organisations }) => {
+        this.setState({
+          organisations,
+        });
+      })
+      .catch(globalErrorHandler);
   }
 
   handleOrganisationChange = async (value) => {
@@ -69,7 +65,7 @@ class Login extends React.PureComponent {
         departments,
       });
     } catch (error) {
-      console.log(error);
+      globalErrorHandler(error);
     }
   };
 

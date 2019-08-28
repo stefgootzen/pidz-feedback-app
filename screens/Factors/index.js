@@ -11,7 +11,7 @@ import { setFactors, setOtherFactors } from '../../actions/formActions';
 import Button from '../../components/Button';
 import SelectableFactorCards from '../../components/SelectableFactorCards';
 import OtherFactorCards from '../../components/OtherFactorCards';
-import axiosInstance from '../../utils/axios';
+import axiosInstance, { globalErrorHandler } from '../../utils/axios';
 
 const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
   ${Spacing.sectionPadding};
@@ -34,29 +34,25 @@ class Factors extends React.PureComponent {
     initialFactors: [],
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     const {
       departmentId,
     } = this.props;
 
-    try {
-      const {
-        data: factors,
-      } = await axiosInstance.get(`/factors?departmentId=${departmentId}`);
+    axiosInstance.get(`/factors?departmentId=${departmentId}`)
+      .then(({ data: factors }) => {
+        const initialFactors = factors.map(factor => ({
+          id: factor.id,
+          name: factor.name,
+          relevant: false,
+          level: null,
+        }));
 
-      const initialFactors = factors.map(factor => ({
-        id: factor.id,
-        name: factor.name,
-        relevant: false,
-        level: null,
-      }));
-
-      this.setState({
-        initialFactors,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+        this.setState({
+          initialFactors,
+        });
+      })
+      .catch(globalErrorHandler);
   }
 
   render() {
@@ -92,8 +88,6 @@ class Factors extends React.PureComponent {
           const {
             review,
           } = this.props;
-
-          console.log(review);
 
           await axiosInstance.put('/reviews', review);
 

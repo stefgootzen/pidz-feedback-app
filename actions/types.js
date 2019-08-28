@@ -9,3 +9,7 @@ export const SET_OTHER_FACTORS = 'SET_OTHER_FACTORS';
 // jwtReducer
 export const REMOVE_JWT = 'REMOVE_JWT';
 export const SET_JWT = 'SET_JWT';
+
+// errorReducer
+export const SET_ERROR = 'SET_ERROR';
+export const REMOVE_ERROR = 'REMOVE_ERROR';

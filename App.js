@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { View } from 'react-native';
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -8,6 +9,7 @@ import {
 import { PersistGate } from 'redux-persist/es/integration/react';
 import { store, persistor } from './store';
 import Suitability from './screens/Suitability';
+import ErrorShower from './components/ErrorShower';
 import Selection from './screens/Selection';
 import Closing from './screens/Closing';
 import Factors from './screens/Factors';
@@ -56,7 +58,10 @@ const AppContainer = createAppContainer(Routes);
 const App = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <AppContainer />
+      <View style={{ flex: 1 }}>
+        <AppContainer />
+        <ErrorShower />
+      </View>
     </PersistGate>
   </Provider>
 );

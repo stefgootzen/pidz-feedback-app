@@ -5,10 +5,9 @@ import { FlatList, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import { setFreelancer } from '../../actions/formActions';
 import Header from '../../components/Header';
-import employees from './employees.json';
 import UserCard from '../../components/UserCard';
 import { Colors, Spacing, Typography } from '../../styles';
-import axiosInstance from '../../utils/axios';
+import axiosInstance, { globalErrorHandler } from '../../utils/axios';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -28,22 +27,22 @@ const HeadingText = styled.Text`
 `;
 
 class Selection extends React.Component {
-  state = {
-    freelancers: [],
-  };
+  constructor(props) {
+    super(props);
 
-  async componentDidMount() {
-    try {
-      const {
-        data: freelancers,
-      } = await axiosInstance.get('/freelancers');
+    this.state = {
+      freelancers: [],
+    };
+  }
 
-      this.setState({
-        freelancers,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  componentDidMount() {
+    axiosInstance.get('/freelancers')
+      .then(({ data: freelancers }) => {
+        this.setState({
+          freelancers,
+        });
+      })
+      .catch(globalErrorHandler);
   }
 
   handleClick = (values) => {
@@ -87,7 +86,7 @@ Selection.navigationOptions = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setFreelancer: subject => dispatch(setFreelancer(subject)),
+  setFreelancer: values => dispatch(setFreelancer(values)),
 });
 
 Selection.propTypes = {

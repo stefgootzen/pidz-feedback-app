@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { View, ActivityIndicator } from 'react-native';
-import axiosInstance, { setAuthorizationHeader } from '../../utils/axios';
+import axiosInstance, { globalErrorHandler, setAuthorizationHeader } from '../../utils/axios';
 
 
 class InitialLoadingScreen extends React.Component {
@@ -21,12 +21,17 @@ class InitialLoadingScreen extends React.Component {
       setAuthorizationHeader(jwt);
 
       // Verify the Auth header
-      const {
-        data: { verified },
-      } = await axiosInstance.get('/auth/verify');
+      try {
+        const {
+          data: { verified },
+        } = await axiosInstance.get('/auth/verify');
 
-      if (verified) {
-        return navigation.navigate('Selection');
+        if (verified) {
+          return navigation.navigate('Selection');
+        }
+      } catch (error) {
+        globalErrorHandler(error);
+        return navigation.navigate('Login');
       }
     }
 

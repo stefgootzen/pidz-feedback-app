@@ -9,7 +9,7 @@ import { Colors, Spacing, Typography } from '../../styles';
 import { setFreelancerCompetence } from '../../actions/formActions';
 import Button from '../../components/Button';
 import SelectableCards from '../../components/SelectableCards';
-import axiosInstance from '../../utils/axios';
+import axiosInstance, { globalErrorHandler } from '../../utils/axios';
 
 const Wrapper = styled.View`
   ${Spacing.sectionPadding};
@@ -36,20 +36,14 @@ class FreelancerCompetences extends React.Component {
     competences: [],
   };
 
-  async componentDidMount() {
-    try {
-      const {
-        data: competences,
-      } = await axiosInstance.get('/competences');
-
-      console.log(competences);
-
-      this.setState({
-        competences,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  componentDidMount() {
+    axiosInstance.get('/competences')
+      .then(({ data: competences }) => {
+        this.setState({
+          competences,
+        });
+      })
+      .catch(globalErrorHandler);
   }
 
   determineNextStep = () => {
@@ -94,7 +88,6 @@ class FreelancerCompetences extends React.Component {
         <MaybeShowOnboarding onboardingId="freelancerCompetences" />
         <Formik
           onSubmit={(competence) => {
-            console.log(competence);
             const data = {
               id: currentCompetenceInfo.id,
               level: competence[currentCompetenceName],
@@ -134,6 +127,7 @@ FreelancerCompetences.navigationOptions = {
 
 FreelancerCompetences.propTypes = {
   navigation: PropTypes.shape().isRequired,
+  setFreelancerCompetence: PropTypes.func.isRequired,
   freelancerName: PropTypes.string,
 };
 

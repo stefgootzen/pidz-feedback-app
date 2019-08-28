@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { Text } from 'react-native';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
 import { Colors, Spacing, Typography } from '../../styles';
@@ -21,8 +19,7 @@ const BodyText = styled.Text`
   ${Typography.fatBodyText};
 `;
 
-const Closing = ({ form, navigation }) => {
-  console.log(form);
+const Closing = ({ navigation }) => {
   return (
     <Wrapper>
       <FullHeightView>
@@ -34,7 +31,7 @@ const Closing = ({ form, navigation }) => {
       </FullHeightView>
     </Wrapper>
   );
-}
+};
 
 Closing.navigationOptions = {
   header: <Header>Bedankt</Header>,
@@ -42,19 +39,6 @@ Closing.navigationOptions = {
 
 Closing.propTypes = {
   navigation: PropTypes.shape().isRequired,
-  form: PropTypes.shape(),
 };
 
-Closing.defaultProps = {
-  form: null,
-};
-
-const mapStateToProps = state => ({
-  form: state.form,
-});
-
-
-export default connect(
-  mapStateToProps,
-  null,
-)(Closing);
+export default Closing;
