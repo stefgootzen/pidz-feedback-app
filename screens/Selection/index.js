@@ -38,10 +38,8 @@ class Selection extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
     axiosInstance.get('/freelancers')
       .then(({ data: freelancers }) => {
-        console.log(freelancers);
         this.setState({
           freelancers,
         });
