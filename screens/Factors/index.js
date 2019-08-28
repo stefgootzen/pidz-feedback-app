@@ -124,7 +124,7 @@ class Factors extends React.PureComponent {
 }
 
 Factors.navigationOptions = {
-  header: <Header>Feedback</Header>,
+  header: <Header title="Feedback" />,
 };
 
 Factors.propTypes = {

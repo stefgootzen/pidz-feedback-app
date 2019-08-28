@@ -186,7 +186,7 @@ class Login extends React.PureComponent {
 }
 
 Login.navigationOptions = {
-  header: <Header>Login</Header>,
+  header: <Header title="Login" />,
 };
 
 Login.propTypes = {

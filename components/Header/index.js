@@ -11,20 +11,27 @@ const Wrapper = styled.View`
   padding-top: 40px;
   ${Spacing.sectionPadding};
   background-color: ${Colors.pidzBackground};
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `;
 
-const Header = ({ children }) => (
+const Header = ({ title, icon }) => (
   <Wrapper>
-    <Title>{ children }</Title>
+    <Title>{ title }</Title>
+    { icon }
   </Wrapper>
 );
 
 Header.propTypes = {
-  children: PropTypes.node,
+  title: PropTypes.string,
+  icon: PropTypes.node,
 };
 
 Header.defaultProps = {
-  children: null,
+  title: null,
+  icon: null,
 };
 
 

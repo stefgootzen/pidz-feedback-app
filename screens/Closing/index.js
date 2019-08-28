@@ -34,7 +34,7 @@ const Closing = ({ navigation }) => {
 };
 
 Closing.navigationOptions = {
-  header: <Header>Bedankt</Header>,
+  header: <Header title="Bedankt" />,
 };
 
 Closing.propTypes = {

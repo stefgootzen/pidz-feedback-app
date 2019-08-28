@@ -84,7 +84,7 @@ const Suitability = (props) => {
 };
 
 Suitability.navigationOptions = {
-  header: <Header>Feedback</Header>,
+  header: <Header title="Feedback" />,
 };
 
 Suitability.propTypes = {

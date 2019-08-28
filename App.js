@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faSmile, faMeh, faFrown, faTrash, faAngleRight,
+  faSmile, faMeh, faFrown, faTrash, faAngleRight, faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { PersistGate } from 'redux-persist/es/integration/react';
 import { store, persistor } from './store';
@@ -18,7 +18,7 @@ import Login from './screens/Login';
 import FreelancerCompetences from './screens/FreelancerCompetences';
 import fromRight from './utils/transitionConfig';
 
-library.add(faSmile, faMeh, faFrown, faTrash, faAngleRight);
+library.add(faSmile, faMeh, faFrown, faTrash, faAngleRight, faSignOutAlt);
 
 const AuthStack = createStackNavigator({
   Login: {

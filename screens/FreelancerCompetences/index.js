@@ -122,7 +122,7 @@ class FreelancerCompetences extends React.Component {
 }
 
 FreelancerCompetences.navigationOptions = {
-  header: <Header>Feedback</Header>,
+  header: <Header title="Feedback" />,
 };
 
 FreelancerCompetences.propTypes = {

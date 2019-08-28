@@ -12,7 +12,11 @@ const setAuthorizationHeader = (token) => {
   axiosInstance.defaults.headers.common.Authorization = token;
 };
 
+const removeAuthorizationHeader = () => {
+  axiosInstance.defaults.headers.common.Authorization = null;
+};
+
 const globalErrorHandler = error => store.dispatch(setError(error.response.data.message));
 
-export { globalErrorHandler, setAuthorizationHeader };
+export { globalErrorHandler, setAuthorizationHeader, removeAuthorizationHeader };
 export default axiosInstance;

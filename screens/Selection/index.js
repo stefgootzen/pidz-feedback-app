@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { FlatList, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import { setFreelancer } from '../../actions/formActions';
+import SignoutIcon from '../../components/SignoutIcon';
 import Header from '../../components/Header';
 import UserCard from '../../components/UserCard';
 import { Colors, Spacing, Typography } from '../../styles';
@@ -82,7 +83,12 @@ class Selection extends React.Component {
 }
 
 Selection.navigationOptions = {
-  header: <Header>Hallo!</Header>,
+  header: (
+    <Header
+      title="Feedback"
+      icon={<SignoutIcon />}
+    />
+  ),
 };
 
 const mapDispatchToProps = dispatch => ({
