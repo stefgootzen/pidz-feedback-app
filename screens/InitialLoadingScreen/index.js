@@ -1,10 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, ActivityIndicator } from 'react-native';
+import styled from 'styled-components';
 import axiosInstance, { globalErrorHandler, setAuthorizationHeader } from '../../utils/axios';
 import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
+import { Colors } from '../../styles';
 
-
+const StyledView = styled.View`
+  height: 100%;
+  background-color: ${Colors.pidzLightBlue};
+`;
 class InitialLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -41,9 +45,7 @@ class InitialLoadingScreen extends React.Component {
 
   render() {
     return (
-      <View>
-        <ActivityIndicator />
-      </View>
+      <StyledView />
     );
   }
 }

@@ -1,26 +1,71 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
-import Button from '../../components/Button';
-import Header from '../../components/Header';
+import { Dimensions } from 'react-native';
+import { LinearGradient } from 'expo';
+import { Button as NativeButton } from 'react-native-elements/src/index';
 import { Colors, Spacing, Typography } from '../../styles';
-import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
 import axiosInstance, { globalErrorHandler } from '../../utils/axios';
 import { setOnboardingState } from '../../actions/onboardingActions';
 
+
+const Button = styled(NativeButton).attrs({
+  disabledStyle: {
+    opacity: 0.5,
+  },
+  containerStyle: {
+    borderColor: Colors.pidzDarkBlue,
+    borderWidth: 1.5,
+  },
+  buttonStyle: {
+    backgroundColor: 'transparent',
+  },
+  titleStyle: {
+    color: Colors.pidzDarkBlue,
+  },
+})``;
+
 const Wrapper = styled.View`
-  ${Spacing.sectionPadding};
-  background-color: ${Colors.pidzBackground};
+  background-color: ${Colors.pidzLightBlue};
+  display: flex;
+  flex-direction: column;
   height: 100%;
 `;
 
-const FullHeightView = styled.View`
-  height: 100%;
+const ImageWrapper = styled(LinearGradient)`
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
 `;
 
-const BodyText = styled.Text`
-  ${Typography.fatBodyText};
+const ContentWrapper = styled.View`
+  padding: ${Spacing.base}px;
+  background-color: white;
+  flex-shrink: 0;
+`;
+
+const standardText = css`
+  text-align: center;
+  color: ${Colors.pidzDarkBlue};
+`;
+
+const DescriptionText = styled.Text`
+  ${standardText};
+  margin-bottom: ${Spacing.largest};
+`;
+
+const TitleText = styled.Text`
+  ${Typography.headingText};
+  text-align: center;
+  margin-bottom: ${Spacing.smaller};
+  ${standardText};
+`;
+
+const StyledImage = styled.Image`
+  width: ${Dimensions.get('window').width * 0.8};
+  resize-mode: contain;
+  height: 250px;
 `;
 
 class Closing extends React.Component {
@@ -43,25 +88,35 @@ class Closing extends React.Component {
 
     return (
       <Wrapper>
-        <FullHeightView>
-          <BodyText>Bedankt voor het invullen van de review!</BodyText>
-          <Button
-            onPress={() => navigateWithOnboarding(navigation, 'Selection')}
-            title="Volgende"
+        <ImageWrapper
+          colors={[Colors.pidzLightBlue, Colors.pidzLightBlue, 'white']}
+          location={[0, 0.7, 1]}
+        >
+          <StyledImage
+            source={require('../../assets/bedankt.png')} // eslint-disable-line global-require
+            alt="Bedankt image"
           />
-        </FullHeightView>
+        </ImageWrapper>
+        <ContentWrapper>
+          <TitleText>Bedankt voor je tijd</TitleText>
+          <DescriptionText>Samen verbeteren we het zorglandschap!</DescriptionText>
+          <Button
+            onPress={() => navigation.navigate('Selection')}
+            title="Afronden"
+          />
+        </ContentWrapper>
       </Wrapper>
     );
   }
 }
 
-Closing.navigationOptions = {
-  header: <Header title="Bedankt" />,
-};
-
 Closing.propTypes = {
   navigation: PropTypes.shape().isRequired,
   review: PropTypes.shape().isRequired,
+};
+
+Closing.navigationOptions = {
+  header: null,
 };
 
 const mapStateToProps = state => ({

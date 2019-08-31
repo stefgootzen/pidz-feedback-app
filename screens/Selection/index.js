@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FlatList, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import { setFreelancer } from '../../actions/formActions';
 import SignoutIcon from '../../components/SignoutIcon';
@@ -61,6 +61,15 @@ class Selection extends React.Component {
     const {
       freelancers,
     } = this.state;
+
+
+    if (freelancers.length === 0) {
+      return (
+        <Wrapper>
+          <ActivityIndicator />
+        </Wrapper>
+      );
+    }
 
     return (
       <Wrapper>

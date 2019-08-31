@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Header from '../../components/Header';
@@ -77,7 +78,11 @@ class FreelancerCompetences extends React.Component {
     } = this.state;
 
     if (competences.length === 0) {
-      return null;
+      return (
+        <Wrapper>
+          <ActivityIndicator />
+        </Wrapper>
+      );
     }
 
     const currentCompetenceInfo = competences[currentCompetenceIndex];

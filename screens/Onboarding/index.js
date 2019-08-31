@@ -1,43 +1,75 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { NavigationActions } from 'react-navigation';
-import { Dimensions, View } from 'react-native';
-import { Spacing, Typography } from '../../styles';
-import Button from '../../components/Button';
+import styled, { css } from 'styled-components';
+import { Button as NativeButton } from 'react-native-elements/src/index';
+import { LinearGradient } from 'expo';
+import { Dimensions } from 'react-native';
+import { Colors, Spacing, Typography } from '../../styles';
 import onboardingData from '../../assets/onboardingData';
+import Images from './images';
+
+const Button = styled(NativeButton).attrs({
+  disabledStyle: {
+    opacity: 0.5,
+  },
+  containerStyle: {
+    borderColor: Colors.pidzDarkBlue,
+    borderWidth: 1.5,
+  },
+  buttonStyle: {
+    backgroundColor: 'transparent',
+  },
+  titleStyle: {
+    color: Colors.pidzDarkBlue,
+  },
+})``;
 
 const Wrapper = styled.View`
-  ${Spacing.sectionPadding};
+  background-color: ${Colors.pidzLightBlue};
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  width: 100%;
+`;
+
+const ImageWrapper = styled(LinearGradient)`
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ContentWrapper = styled.View`
-  display: flex;
-  justify-content: center;
-  height: 100%;
+  padding: ${Spacing.base}px;
+  background-color: white;
+  flex-shrink: 0;
 `;
 
-const CenteredText = styled.Text`
+const standardText = css`
   text-align: center;
+  color: ${Colors.pidzDarkBlue};
 `;
 
-const FatBodyText = styled(CenteredText)`
+const DescriptionText = styled.Text`
+  ${standardText};
+  margin-bottom: ${Spacing.largest};
+`;
+
+const StepText = styled.Text`
   ${Typography.fatBodyText};
+  ${standardText};
+  margin-bottom: ${Spacing.smaller};
 `;
 
-const HeadingText = styled(CenteredText)`
+const TitleText = styled.Text`
   ${Typography.headingText};
-  margin-bottom: 7px;
+  text-align: center;
+  margin-bottom: ${Spacing.smaller};
+  ${standardText};
 `;
 
 const StyledImage = styled.Image`
-  width: ${Dimensions.get('window').width * 0.8};
-  height: 250px;
+  width: ${Dimensions.get('window').width * 0.5};
   resize-mode: contain;
-  align-self: center;
-  margin: 15px 0;
+  height: 250px;
 `;
 
 class Onboarding extends React.Component {
@@ -57,35 +89,42 @@ class Onboarding extends React.Component {
 
     const {
       description,
-      image,
       step,
       title,
     } = onboardingData[route.toLowerCase()];
 
     return (
-      <View>
-        <Wrapper>
-          <ContentWrapper>
-            <FatBodyText>{`Stap ${step}`}</FatBodyText>
-            <StyledImage
-              source={require('../../assets/placeholder.png')} // eslint-disable-line global-require
-              alt="Onboarding image"
-            />
-            <HeadingText>{title}</HeadingText>
-            <CenteredText>{description}</CenteredText>
-          </ContentWrapper>
+      <Wrapper>
+        <ImageWrapper
+          colors={[Colors.pidzLightBlue, Colors.pidzLightBlue, 'white']}
+          location={[0, 0.7, 1]}
+        >
+          <StyledImage
+            source={Images[route.toLowerCase()]} // eslint-disable-line global-require
+            alt="Onboarding image"
+          />
+        </ImageWrapper>
+        <ContentWrapper>
+          <StepText>{`Stap ${step}`}</StepText>
+          <TitleText>{title}</TitleText>
+          <DescriptionText>{description}</DescriptionText>
           <Button
             onPress={this.handleButtonClick}
             title="Volgende"
           />
-        </Wrapper>
-      </View>
+        </ContentWrapper>
+
+      </Wrapper>
     );
   }
 }
 
 Onboarding.propTypes = {
   navigation: PropTypes.shape().isRequired,
+};
+
+Onboarding.navigationOptions = {
+  header: null,
 };
 
 export default Onboarding;

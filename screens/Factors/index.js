@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { KeyboardAvoidingView, ScrollView } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Header from '../../components/Header';
@@ -68,9 +68,13 @@ class Factors extends React.PureComponent {
     } = this.state;
 
     if (initialFactors.length === 0) {
-      return null;
+      return (
+        <StyledKeyboardAvoidingView>
+          <ActivityIndicator />
+        </StyledKeyboardAvoidingView>
+      );
     }
-
+    
     return (
       <Formik
         initialValues={{
