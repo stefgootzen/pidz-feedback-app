@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { TouchableWithoutFeedback, View, Text } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { connect } from 'formik';
 import styled from 'styled-components';
-import { Button } from 'react-native-elements';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome/index';
 import { Colors, Spacing, Typography } from '../../styles';
-import SelectableSmileys from '../SelectableSmileys';
-import { btnGroupBoolToYesNo, btnGroupYesNoToBool } from '../../utils/btnGroupYesNoToBool';
+import RadioTags from '../RadioTags';
 import SecondaryButton from '../SecondaryButton';
 
 const FlexRow = styled(View)`
@@ -14,30 +12,12 @@ const FlexRow = styled(View)`
   flex-direction: row;
 `;
 
-const Card = styled(FlexRow)`
-  background-color: white;
-  padding: ${Spacing.small}px;
-  margin-bottom: ${Spacing.small}px;
-  border-radius: 5px;
-  display: flex;
+const SpaceBetween = styled(FlexRow)`
+  justify-content: space-between;
 `;
 
 const FatBodyText = styled(Text)`
   ${Typography.fatBodyText};
-`;
-
-const OneThird = styled(View)`
-  flex: 1;
-  justify-content: center;
-`;
-
-const TwoThird = styled(View)`
-  flex: 2;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  opacity: ${props => (props.disabled ? 0.2 : 1)}
 `;
 
 const StyledTextInput = styled.TextInput`
@@ -46,12 +26,17 @@ const StyledTextInput = styled.TextInput`
   flex: 1;
 `;
 
-class OtherFactorCards extends React.PureComponent {
+const FatText = styled.Text`
+  ${Typography.fatBodyText};
+`;
+
+class OtherCompetenceCards extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      newFactor: '',
+      newCompetence: '',
       idCounter: 0,
+      error: null,
     };
   }
 
@@ -72,40 +57,50 @@ class OtherFactorCards extends React.PureComponent {
 
   handleTextChange = (name) => {
     this.setState({
-      newFactor: name,
+      newCompetence: name,
     });
   };
 
-  addNewFactor = () => {
+  addNewCompetence = () => {
     const {
       values,
       onChange,
     } = this.props;
 
     const {
-      newFactor,
+      newCompetence,
       idCounter,
     } = this.state;
 
-    if (newFactor === '') {
+    if (newCompetence === '') {
       return;
     }
+
+    const valueExistsAlready = values.find(value => value.name === newCompetence);
+    if (valueExistsAlready) {
+      this.setState({
+        error: 'Deze competentie heb je al aangemaakt',
+      });
+      return;
+    }
+
     // Extract the right object out of the values array
     values.push({
       id: idCounter,
-      name: newFactor,
+      name: newCompetence,
       level: null,
     });
 
     this.setState(prevState => ({ //eslint-disable-line
       idCounter: prevState.idCounter += 1, //eslint-disable-line
-      newFactor: '',
+      newCompetence: '',
+      error: null,
     }));
 
     onChange(values);
   };
 
-  removeFactor = (id) => {
+  removeCompetence = (id) => {
     const {
       values,
       onChange,
@@ -122,7 +117,8 @@ class OtherFactorCards extends React.PureComponent {
     } = this.props;
 
     const {
-      newFactor,
+      error,
+      newCompetence,
     } = this.state;
 
     return (
@@ -134,26 +130,21 @@ class OtherFactorCards extends React.PureComponent {
           <StyledTextInput
             onChangeText={value => this.handleTextChange(value)}
             placeholder="Competentie"
-            value={newFactor}
+            value={newCompetence}
             underlineColorAndroid={Colors.darkGrey}
           />
           <SecondaryButton
-            onPress={this.addNewFactor}
+            onPress={this.addNewCompetence}
             title="Toevoegen"
           />
         </FlexRow>
+        {error && <Text>{error}</Text>}
         {
-          values.map(factor => (
-            <Card key={factor.id}>
-              <OneThird>
-                <Text>{factor.name}</Text>
-              </OneThird>
-              <TwoThird>
-                <SelectableSmileys
-                  handleChange={value => this.handleLevelChange(factor.id, value)}
-                  currentLevel={factor.level}
-                />
-                <TouchableWithoutFeedback onPress={() => this.removeFactor(factor.id)}>
+          values.map(competence => (
+            <React.Fragment key={competence.id}>
+              <SpaceBetween>
+                <FatText>{competence.name}</FatText>
+                <TouchableWithoutFeedback onPress={() => this.removeCompetence(competence.id)}>
                   <FontAwesomeIcon
                     style={{
                       marginLeft: 12,
@@ -162,8 +153,16 @@ class OtherFactorCards extends React.PureComponent {
                     icon="trash"
                   />
                 </TouchableWithoutFeedback>
-              </TwoThird>
-            </Card>
+              </SpaceBetween>
+
+              <RadioTags
+                onChange={(name, value) => this.handleLevelChange(competence.id, value)}
+                value={competence.level}
+                values={[0, 1, 2]}
+                labels={['Slecht', 'Gemiddeld', 'Goed']}
+                name={competence.name}
+              />
+            </React.Fragment>
           ))
         }
       </View>
@@ -171,4 +170,4 @@ class OtherFactorCards extends React.PureComponent {
   }
 }
 
-export default connect(OtherFactorCards);
+export default connect(OtherCompetenceCards);

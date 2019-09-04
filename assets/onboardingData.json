@@ -5,13 +5,13 @@
     "description": "Geef een duidelijke voorkeur aan bij je planner om deze ZZP' er wel of niet opnieuw in te plannen.",
     "image": null
   },
-  "freelancercompetences": {
+  "pidzcompetences": {
     "step": "2",
     "title": "Beoordeel zorgcompetenties",
     "description": "Help de PIDZ'er om een betere ZZP'er te worden om zo het zorglandschap te verbeteren.",
     "image": null
   },
-  "factors": {
+  "departmentcompetences": {
     "step": "3",
     "title": "Beoordeel afdelingscompetenties",
     "description": "Beoordeel op wat jij en je collega's belangrijk vinden zodat de planner een passende PIDZ'er kan inzetten",

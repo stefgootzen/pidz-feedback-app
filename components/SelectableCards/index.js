@@ -15,14 +15,14 @@ class SelectableCards extends React.PureComponent {
 
   render() {
     const {
-      competence: { CompetenceLevels },
+      competence: { PidzCompetenceLevels },
       selectedLevel,
     } = this.props;
 
     return (
       <View>
         {
-          CompetenceLevels.map(competenceLevel => (
+          PidzCompetenceLevels.map(competenceLevel => (
             <SelectableCard
               key={competenceLevel.description}
               level={competenceLevel.level}

@@ -48,7 +48,7 @@ const Suitability = (props) => {
           };
 
           setSuitability(suitableForDepartment);
-          navigateWithOnboarding(navigation, 'FreelancerCompetences');
+          navigateWithOnboarding(navigation, 'PidzCompetences');
         }}
       >
         {props => (

@@ -1,5 +1,5 @@
 import {
-  SET_FREELANCER_COMPETENCE, SET_FREELANCER, SET_SUITABILITY, SET_FACTORS, SET_OTHER_FACTORS,
+  SET_PIDZ_COMPETENCE, SET_FREELANCER, SET_SUITABILITY, SET_DEPARTMENT_COMPETENCES, SET_OTHER_DEPARTMENT_COMPETENCES,
   SET_DEPARTMENT,
 } from './types';
 
@@ -24,23 +24,23 @@ export const setSuitability = data => (dispatch) => {
   });
 };
 
-export const setFreelancerCompetence = data => (dispatch) => {
+export const setPidzCompetence = data => (dispatch) => {
   dispatch({
-    type: SET_FREELANCER_COMPETENCE,
+    type: SET_PIDZ_COMPETENCE,
     payload: data,
   });
 };
 
-export const setFactors = data => (dispatch) => {
+export const setDepartmentCompetences = data => (dispatch) => {
   dispatch({
-    type: SET_FACTORS,
+    type: SET_DEPARTMENT_COMPETENCES,
     payload: data,
   });
 };
 
-export const setOtherFactors = data => (dispatch) => {
+export const setOtherDepartmentCompetences = data => (dispatch) => {
   dispatch({
-    type: SET_OTHER_FACTORS,
+    type: SET_OTHER_DEPARTMENT_COMPETENCES,
     payload: data,
   });
 };

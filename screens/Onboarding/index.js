@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { Button as NativeButton } from 'react-native-elements/src/index';
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Dimensions } from 'react-native';
 import { Colors, Spacing, Typography } from '../../styles';
 import onboardingData from '../../assets/onboardingData';

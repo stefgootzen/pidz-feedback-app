@@ -176,15 +176,15 @@ class Login extends React.PureComponent {
                   })}
                 >
                   {
-                  organisations.map(organisation => (
-                    <Picker.Item
-                      color={Colors.pidzDarkBlue}
-                      key={organisation.id}
-                      label={organisation.name}
-                      value={organisation.id}
-                    />
-                  ))
-                }
+                    organisations.map(organisation => (
+                      <Picker.Item
+                        color={Colors.pidzDarkBlue}
+                        key={organisation.id}
+                        label={organisation.name}
+                        value={organisation.id}
+                      />
+                    ))
+                  }
                 </StyledPicker>
 
                 <FatBodyText>Afdeling</FatBodyText>
@@ -196,15 +196,15 @@ class Login extends React.PureComponent {
                   })}
                 >
                   {
-                  departments.map(department => (
-                    <Picker.Item
-                      color={Colors.pidzDarkBlue}
-                      key={department.id}
-                      label={department.name}
-                      value={department.id}
-                    />
-                  ))
-                }
+                    departments.map(department => (
+                      <Picker.Item
+                        color={Colors.pidzDarkBlue}
+                        key={department.id}
+                        label={department.name}
+                        value={department.id}
+                      />
+                    ))
+                  }
                 </StyledPicker>
 
                 <FatBodyText>Wachtwoord</FatBodyText>
@@ -215,7 +215,7 @@ class Login extends React.PureComponent {
                   value={props.values.password}
                   underlineColorAndroid={Colors.pidzDarkBlue}
                 />
-                { error && (<ErrorText>{ error }</ErrorText>) }
+                {error && (<ErrorText>{error}</ErrorText>)}
                 <StyledButton
                   disabled={props.values.password.length === 0}
                   onPress={props.handleSubmit}

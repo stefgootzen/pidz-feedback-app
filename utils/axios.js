@@ -3,7 +3,7 @@ import { setError } from '../actions/errorActions';
 import { store } from '../store';
 
 const config = {
-  baseURL: 'http://192.168.2.15:8080',
+  baseURL: 'http://10.10.2.36:8080',
 };
 
 const axiosInstance = axios.create(config);

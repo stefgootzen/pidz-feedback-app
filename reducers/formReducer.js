@@ -1,5 +1,5 @@
 import {
-  SET_DEPARTMENT, SET_FACTORS, SET_FREELANCER_COMPETENCE, SET_OTHER_FACTORS, SET_FREELANCER,
+  SET_DEPARTMENT, SET_DEPARTMENT_COMPETENCES, SET_PIDZ_COMPETENCE, SET_OTHER_DEPARTMENT_COMPETENCES, SET_FREELANCER,
   SET_SUITABILITY,
 } from '../actions/types';
 
@@ -15,9 +15,9 @@ const initialState = {
     isSuitable: null,
     clarification: null,
   },
-  freelancerCompetences: [],
-  factors: null,
-  otherFactors: null,
+  pidzCompetences: [],
+  departmentCompetences: null,
+  otherDepartmentCompetences: null,
 };
 
 const formReducer = (state = initialState, action) => {
@@ -48,23 +48,23 @@ const formReducer = (state = initialState, action) => {
           clarification: action.payload.clarification,
         },
       };
-    case SET_FREELANCER_COMPETENCE:
+    case SET_PIDZ_COMPETENCE:
       return {
         ...state,
-        freelancerCompetences: [
-          ...state.freelancerCompetences,
+        pidzCompetences: [
+          ...state.pidzCompetences,
           action.payload,
         ],
       };
-    case SET_FACTORS:
+    case SET_DEPARTMENT_COMPETENCES:
       return {
         ...state,
-        factors: action.payload,
+        departmentCompetences: action.payload,
       };
-    case SET_OTHER_FACTORS:
+    case SET_OTHER_DEPARTMENT_COMPETENCES:
       return {
         ...state,
-        otherFactors: action.payload,
+        otherDepartmentCompetences: action.payload,
       };
     default:
       return state;

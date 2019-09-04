@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 import { Dimensions } from 'react-native';
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Button as NativeButton } from 'react-native-elements/src/index';
 import { Colors, Spacing, Typography } from '../../styles';
 import axiosInstance, { globalErrorHandler } from '../../utils/axios';
