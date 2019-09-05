@@ -17,6 +17,7 @@ import DepartmentCompetences from './screens/DepartmentCompetences';
 import Onboarding from './screens/Onboarding';
 import InitialLoadingScreen from './screens/InitialLoadingScreen';
 import Login from './screens/Login';
+import FreelancerCompetences from './screens/FreelancerCompetences';
 import PidzCompetences from './screens/PidzCompetences';
 import fromRight from './utils/transitionConfig';
 
@@ -40,6 +41,9 @@ const MainStack = createStackNavigator({
   },
   DepartmentCompetences: {
     screen: DepartmentCompetences,
+  },
+  FreelancerCompetences: {
+    screen: FreelancerCompetences,
   },
   Closing: {
     screen: Closing,

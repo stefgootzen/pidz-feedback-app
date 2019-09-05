@@ -101,7 +101,7 @@ class DepartmentCompetences extends React.PureComponent {
             setOtherDepartmentCompetences(values.otherDepartmentCompetences);
           }
 
-          navigateWithOnboarding(navigation, 'Closing');
+          navigateWithOnboarding(navigation, 'FreelancerCompetences');
         }}
       >
         {props => (

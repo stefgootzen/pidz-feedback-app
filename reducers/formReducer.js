@@ -1,6 +1,6 @@
 import {
-  SET_DEPARTMENT, SET_DEPARTMENT_COMPETENCES, SET_PIDZ_COMPETENCE, SET_OTHER_DEPARTMENT_COMPETENCES, SET_FREELANCER,
-  SET_SUITABILITY,
+  SET_DEPARTMENT, SET_DEPARTMENT_COMPETENCES, SET_PIDZ_COMPETENCE, SET_FREELANCER,
+  SET_OTHER_DEPARTMENT_COMPETENCES, SET_SUITABILITY, SET_FREELANCER_COMPETENCES,
 } from '../actions/types';
 
 const initialState = {
@@ -16,6 +16,7 @@ const initialState = {
     clarification: null,
   },
   pidzCompetences: [],
+  freelancerCompetences: null,
   departmentCompetences: null,
   otherDepartmentCompetences: null,
 };
@@ -55,6 +56,11 @@ const formReducer = (state = initialState, action) => {
           ...state.pidzCompetences,
           action.payload,
         ],
+      };
+    case SET_FREELANCER_COMPETENCES:
+      return {
+        ...state,
+        freelancerCompetences: action.payload,
       };
     case SET_DEPARTMENT_COMPETENCES:
       return {
