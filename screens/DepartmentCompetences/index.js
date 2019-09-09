@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import Header from '../../components/Header';
+import EmptyHeader from '../../components/EmptyHeader';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setDepartmentCompetences, setOtherDepartmentCompetences } from '../../actions/formActions';
 import Button from '../../components/Button';
@@ -150,7 +150,7 @@ class DepartmentCompetences extends React.PureComponent {
 }
 
 DepartmentCompetences.navigationOptions = {
-  header: <Header title="Feedback" />,
+  header: <EmptyHeader />,
 };
 
 DepartmentCompetences.propTypes = {

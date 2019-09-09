@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Button from '../../components/Button';
-import Header from '../../components/Header';
+import EmptyHeader from '../../components/EmptyHeader';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setSuitability } from '../../actions/formActions';
 import ButtonGroup from '../../components/ButtonGroup';
@@ -83,7 +83,7 @@ const Suitability = (props) => {
 };
 
 Suitability.navigationOptions = {
-  header: <Header title="Feedback" />,
+  header: <EmptyHeader />,
 };
 
 Suitability.propTypes = {

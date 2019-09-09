@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import Header from '../../components/Header';
+import EmptyHeader from '../../components/EmptyHeader';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setFreelancerCompetences } from '../../actions/formActions';
 import Button from '../../components/Button';
@@ -138,7 +138,7 @@ class FreelancerCompetences extends React.PureComponent {
 }
 
 FreelancerCompetences.navigationOptions = {
-  header: <Header title="Feedback" />,
+  header: <EmptyHeader />,
 };
 
 FreelancerCompetences.propTypes = {

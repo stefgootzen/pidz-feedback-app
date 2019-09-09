@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import Header from '../../components/Header';
+import EmptyHeader from '../../components/EmptyHeader';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setPidzCompetence } from '../../actions/formActions';
 import Button from '../../components/Button';
@@ -126,7 +126,7 @@ class PidzCompetences extends React.Component {
 }
 
 PidzCompetences.navigationOptions = {
-  header: <Header title="Feedback" />,
+  header: <EmptyHeader />,
 };
 
 PidzCompetences.propTypes = {

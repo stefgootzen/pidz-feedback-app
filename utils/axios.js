@@ -3,7 +3,7 @@ import { setError } from '../actions/errorActions';
 import { store } from '../store';
 
 const config = {
-  baseURL: 'http://192.168.2.35:8080',
+  baseURL: 'http://10.10.2.71:8080',
   timeout: 5000,
 };
 
