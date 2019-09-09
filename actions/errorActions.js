@@ -11,5 +11,5 @@ export const setError = data => (dispatch) => {
     dispatch({
       type: REMOVE_ERROR,
     });
-  }, 3000);
+  }, 5000);
 };

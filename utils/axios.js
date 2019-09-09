@@ -3,7 +3,8 @@ import { setError } from '../actions/errorActions';
 import { store } from '../store';
 
 const config = {
-  baseURL: 'http://10.10.2.36:8080',
+  baseURL: 'http://192.168.2.35:8080',
+  timeout: 5000,
 };
 
 const axiosInstance = axios.create(config);
@@ -16,7 +17,13 @@ const removeAuthorizationHeader = () => {
   axiosInstance.defaults.headers.common.Authorization = null;
 };
 
-const globalErrorHandler = error => store.dispatch(setError(error.response.data.message));
+const globalErrorHandler = (error) => {
+  if (!error.status) {
+    store.dispatch(setError('Oeps. We kunnen de server niet bereiken! Controleer je internet verbinding.'));
+  } else {
+    store.dispatch(setError(error.response.data.message));
+  }
+};
 
 export { globalErrorHandler, setAuthorizationHeader, removeAuthorizationHeader };
 export default axiosInstance;
