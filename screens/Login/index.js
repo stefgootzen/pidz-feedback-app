@@ -35,7 +35,7 @@ const ErrorText = styled.Text`
 `;
 
 const FatBodyText = styled.Text`
-  ${Typography.fatBodyText};
+  ${Typography.inputLabel};
   color: ${Colors.pidzDarkBlue};
   margin-top: ${Spacing.small};
 `;

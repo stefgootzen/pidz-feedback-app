@@ -22,13 +22,16 @@ const FullHeightView = styled.View`
   height: 100%;
 `;
 
-const FatBodyText = styled.Text`
-  ${Typography.fatBodyText};
+const InputLabel = styled.Text`
+  ${Typography.inputLabel};
+  margin-top: ${Spacing.base}px;
+  margin-bottom: ${Spacing.small}px;
 `;
 
-const HeadingText = styled.Text`
-  ${Typography.headingText};
-  margin-bottom: ${Spacing.base};
+const CompetenceName = styled.Text`
+  font-size: ${Typography.extraExtraLargeFontSize};
+  color: ${Colors.pidzDarkBlue};
+  font-weight: bold;
 `;
 
 class PidzCompetences extends React.Component {
@@ -103,8 +106,8 @@ class PidzCompetences extends React.Component {
         >
           {props => (
             <FullHeightView>
-              <HeadingText>{`Hoe presteert ${freelancerName} op de onderstaande competentie?`}</HeadingText>
-              <FatBodyText>{currentCompetenceName}</FatBodyText>
+              <InputLabel>{`Hoe presteert ${freelancerName} op de onderstaande competentie?`}</InputLabel>
+              <CompetenceName>{currentCompetenceName}</CompetenceName>
               <SelectableCards
                 competence={currentCompetenceInfo}
                 selectedLevel={props.values[currentCompetenceName]}

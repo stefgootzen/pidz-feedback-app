@@ -54,7 +54,7 @@ const DescriptionText = styled.Text`
 `;
 
 const StepText = styled.Text`
-  ${Typography.fatBodyText};
+  ${Typography.inputLabel};
   ${standardText};
   margin-bottom: ${Spacing.smaller};
 `;

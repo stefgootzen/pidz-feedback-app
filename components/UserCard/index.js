@@ -21,8 +21,11 @@ const StyledImage = styled.Image`
   border-radius: 21px;
 `;
 
-const StyledText = styled.Text`
-  ${Typography.userCardText};
+const UserName = styled.Text`
+  color: ${Colors.pidzBody};
+  font-size: ${Typography.smallFontSize};
+  line-height: 19px;
+  font-weight: bold;
 `;
 
 const UserCard = ({ name, picture }) => (
@@ -31,7 +34,7 @@ const UserCard = ({ name, picture }) => (
       source={{ uri: picture }}
       alt="Profile"
     />
-    <StyledText>{ name }</StyledText>
+    <UserName>{ name }</UserName>
     <FontAwesomeIcon
       style={{
         marginLeft: 'auto',

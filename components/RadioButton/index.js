@@ -7,8 +7,8 @@ const Container = styled.View`
   height: 20px;
   width: 20px;
   border-radius: 10px;
-  border-width: 1;
-  border-color: ${props => (props.isSelected ? Colors.pidzLightBlue : 'black')};
+  border-width: 1px;
+  border-color: ${props => (props.isSelected ? props.color : 'black')};
   align-items: center;
   justify-content: center;
   opacity: ${props => (props.isSelected ? 0.8 : 0.5)};
@@ -17,13 +17,16 @@ const Container = styled.View`
 const Checkmark = styled.View`
   width: 14px;
   height: 14px;
-  border-radius: 7;
-  background-color: 'rgba(137, 210, 246, 0.7)';
+  border-radius: 7px;
+  background-color: ${props => props.color};
 `;
 
-const RadioButton = ({ isSelected }) => (
-  <Container isSelected={isSelected}>
-    {isSelected && <Checkmark />}
+const RadioButton = ({ isSelected, color }) => (
+  <Container
+    color={color}
+    isSelected={isSelected}
+  >
+    {isSelected && <Checkmark color={color} />}
   </Container>
 );
 

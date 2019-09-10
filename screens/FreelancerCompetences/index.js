@@ -25,13 +25,13 @@ const ButtonWrapper = styled.View`
   padding-top: 10px;
 `;
 
-const HeadingText = styled.Text`
-  ${Typography.headingText};
+const InputLabel = styled.Text`
+  ${Typography.inputLabel};
   margin-bottom: ${Spacing.base};
 `;
 
 const FatText = styled.Text`
-  ${Typography.fatBodyText};
+  ${Typography.inputLabel};
 `;
 
 class FreelancerCompetences extends React.PureComponent {
@@ -100,7 +100,7 @@ class FreelancerCompetences extends React.PureComponent {
         {props => (
           <StyledKeyboardAvoidingView behavior="padding" enabled keyboardVerticalOffset={100}>
             <ScrollView>
-              <HeadingText>{`Hoe presteert ${freelancerName} op de onderstaande competenties?`}</HeadingText>
+              <InputLabel>{`Hoe presteert ${freelancerName} op de onderstaande competenties?`}</InputLabel>
               {
                 props.values.freelancerCompetences.map(freelancerCompetence => (
                   <React.Fragment key={freelancerCompetence.id}>
@@ -117,7 +117,7 @@ class FreelancerCompetences extends React.PureComponent {
                       }}
                       value={freelancerCompetence.level}
                       values={['ignore', 0, 1, 2]}
-                      labels={['n.v.t.', 'Slecht', 'Gemiddeld', 'Goed']}
+                      labels={['n.v.t.', 'Heeft veel verbetering nodig', 'Heeft verbetering nodig', 'Heeft geen verbetering nodig']}
                       name={freelancerCompetence.name}
                     />
                   </React.Fragment>

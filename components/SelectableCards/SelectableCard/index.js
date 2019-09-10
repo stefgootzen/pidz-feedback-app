@@ -4,6 +4,7 @@ import { connect } from 'formik';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Colors, Spacing, Typography } from '../../../styles';
+import RadioButton from '../../RadioButton';
 
 const Card = styled.View`
   background-color: white;
@@ -12,24 +13,22 @@ const Card = styled.View`
   border-color: ${props => (props.selected ? Colors.pidzDarkBlue : 'white')};
   padding: ${Spacing.small}px;
   margin-bottom: ${Spacing.small}px;
-  border-radius: 5px;
 `;
 
 const Row = styled.View`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  border-bottom-color: ${Colors.darkGrey};
-  border-bottom-width: 1px;
-  padding-bottom: 3px;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 `;
 
-const CardHeader = styled.Text`
-  ${Typography.fatBodyText};
-  text-transform: uppercase;
-  margin-left: 10px;
-  opacity: 0.7;
+const SmallText = styled.Text`
+  ${Typography.smallBodyText};
+`;
+
+const CardHeading = styled.Text`
+  ${Typography.bodyText};
 `;
 
 class SelectableCard extends React.PureComponent {
@@ -42,51 +41,17 @@ class SelectableCard extends React.PureComponent {
     handleChange(level);
   };
 
-  renderRightSmiley = (level) => {
-    switch (level) {
-      case 0:
-        return (
-          <FontAwesomeIcon
-            style={{
-              color: Colors.pidzRed,
-            }}
-            icon="frown"
-          />
-        );
-      case 1:
-        return (
-          <FontAwesomeIcon
-            style={{
-              color: Colors.pidzOrange,
-            }}
-            icon="meh"
-          />
-        );
-      case 2:
-        return (
-          <FontAwesomeIcon
-            style={{
-              color: Colors.pidzGreen,
-            }}
-            icon="smile"
-          />
-        );
-      default:
-        return null;
-    }
-  };
-
   renderRightText = (level) => {
     let text = '';
     switch (level) {
       case 0:
-        text = 'Slecht';
+        text = 'Heeft veel verbetering nodig';
         break;
       case 1:
-        text = 'Gemiddeld';
+        text = 'Heeft verbetering nodig';
         break;
       case 2:
-        text = 'Goed';
+        text = 'Heeft geen verbetering nodig';
         break;
       default:
         return null;
@@ -105,14 +70,17 @@ class SelectableCard extends React.PureComponent {
       <TouchableWithoutFeedback onPress={this.handleChange}>
         <Card selected={level === selectedLevel}>
           <Row>
-            { this.renderRightSmiley(level)}
-            <CardHeader>
-              { this.renderRightText(level)}
-            </CardHeader>
+            <CardHeading>
+              {this.renderRightText(level)}
+            </CardHeading>
+            <RadioButton
+              color={Colors.pidzDarkBlue}
+              isSelected={level === selectedLevel}
+            />
           </Row>
-          <Text>
+          <SmallText>
             {description}
-          </Text>
+          </SmallText>
         </Card>
       </TouchableWithoutFeedback>
     );

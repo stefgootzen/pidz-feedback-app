@@ -17,7 +17,7 @@ const SpaceBetween = styled(FlexRow)`
 `;
 
 const FatBodyText = styled(Text)`
-  ${Typography.fatBodyText};
+  ${Typography.inputLabel};
 `;
 
 const StyledTextInput = styled.TextInput`
@@ -27,7 +27,7 @@ const StyledTextInput = styled.TextInput`
 `;
 
 const FatText = styled.Text`
-  ${Typography.fatBodyText};
+  ${Typography.inputLabel};
 `;
 
 class OtherCompetenceCards extends React.PureComponent {
@@ -159,7 +159,7 @@ class OtherCompetenceCards extends React.PureComponent {
                 onChange={(name, value) => this.handleLevelChange(competence.id, value)}
                 value={competence.level}
                 values={[0, 1, 2]}
-                labels={['Slecht', 'Gemiddeld', 'Goed']}
+                labels={['Heeft veel verbetering nodig', 'Heeft verbetering nodig', 'Heeft geen verbetering nodig']}
                 name={competence.name}
               />
             </React.Fragment>

@@ -26,13 +26,13 @@ const ButtonWrapper = styled.View`
   padding-top: 10px;
 `;
 
-const HeadingText = styled.Text`
-  ${Typography.headingText};
+const InputLabel = styled.Text`
+  ${Typography.inputLabel};
   margin-bottom: ${Spacing.base};
 `;
 
 const FatText = styled.Text`
-  ${Typography.fatBodyText};
+  ${Typography.inputLabel};
 `;
 
 class DepartmentCompetences extends React.PureComponent {
@@ -107,7 +107,7 @@ class DepartmentCompetences extends React.PureComponent {
         {props => (
           <StyledKeyboardAvoidingView behavior="padding" enabled keyboardVerticalOffset={100}>
             <ScrollView>
-              <HeadingText>{`Hoe presteert ${freelancerName} op de onderstaande competenties?`}</HeadingText>
+              <InputLabel>{`Hoe presteert ${freelancerName} op de onderstaande competenties?`}</InputLabel>
               {
                 props.values.departmentCompetences.map(departmentCompetence => (
                   <React.Fragment key={departmentCompetence.id}>
@@ -124,7 +124,7 @@ class DepartmentCompetences extends React.PureComponent {
                       }}
                       value={departmentCompetence.level}
                       values={['ignore', 0, 1, 2]}
-                      labels={['n.v.t.', 'Slecht', 'Gemiddeld', 'Goed']}
+                      labels={['n.v.t.', 'Heeft veel verbetering nodig', 'Heeft verbetering nodig', 'Heeft geen verbetering nodig']}
                       name={departmentCompetence.name}
                     />
                   </React.Fragment>

@@ -58,10 +58,10 @@ const Routes = createSwitchNavigator({
   auth: AuthStack,
   all: MainStack,
 },
-  {
-    initialRouteName: 'initialLoading',
-    transitionConfig: () => fromRight(),
-  });
+{
+  initialRouteName: 'initialLoading',
+  transitionConfig: () => fromRight(),
+});
 
 const AppContainer = createAppContainer(Routes);
 

@@ -71,7 +71,10 @@ class RadioTags extends React.PureComponent {
                 key={currentValue}
               >
                 <Block isSelected={isSelected}>
-                  <RadioButton isSelected={isSelected} />
+                  <RadioButton
+                    color={Colors.pidzLightBlue}
+                    isSelected={isSelected}
+                  />
                   <Tag isSelected={isSelected}>
                     {labels[i]}
                   </Tag>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Button from '../../components/Button';
@@ -22,8 +23,8 @@ const FullHeightView = styled.View`
   height: 100%;
 `;
 
-const ThinBodyText = styled.Text`
-  ${Typography.ThinBodyText};
+const InputLabel = styled(Text)`
+  ${Typography.inputLabel};
 `;
 
 const Suitability = (props) => {
@@ -53,7 +54,7 @@ const Suitability = (props) => {
       >
         {props => (
           <FullHeightView>
-            <ThinBodyText>{`Vind je ${freelancerName} geschikt om op deze afdeling te werken?`}</ThinBodyText>
+            <InputLabel>{`Vind je ${freelancerName} geschikt om op deze afdeling te werken?`}</InputLabel>
             <ButtonGroup
               onPress={value => props.setFieldValue('suitable', value)}
               selectedIndex={props.values.suitable}
@@ -64,7 +65,7 @@ const Suitability = (props) => {
                 props.touched.suitable && props.errors.suitable ? props.errors.suitable : undefined
               }
             />
-            <ThinBodyText>Toelichting</ThinBodyText>
+            <InputLabel>Mogelijke toelichting</InputLabel>
             <StyledTextInput
               onChangeText={props.handleChange('clarification')}
               onBlur={props.handleBlur('clarification')}
