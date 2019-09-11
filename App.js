@@ -30,6 +30,9 @@ const AuthStack = createStackNavigator({
 });
 
 const MainStack = createStackNavigator({
+  DepartmentCompetences: {
+    screen: DepartmentCompetences,
+  },
   Selection: {
     screen: Selection,
   },
@@ -38,9 +41,6 @@ const MainStack = createStackNavigator({
   },
   PidzCompetences: {
     screen: PidzCompetences,
-  },
-  DepartmentCompetences: {
-    screen: DepartmentCompetences,
   },
   FreelancerCompetences: {
     screen: FreelancerCompetences,
@@ -59,7 +59,7 @@ const Routes = createSwitchNavigator({
   all: MainStack,
 },
 {
-  initialRouteName: 'initialLoading',
+  initialRouteName: 'all',
   transitionConfig: () => fromRight(),
 });
 

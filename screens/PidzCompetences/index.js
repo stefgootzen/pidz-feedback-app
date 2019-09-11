@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import EmptyHeader from '../../components/EmptyHeader';
 import { Colors, Spacing, Typography } from '../../styles';
-import { setPidzCompetence } from '../../actions/formActions';
+import { setPidzCompetences } from '../../actions/formActions';
 import Button from '../../components/Button';
 import SelectableCards from '../../components/SelectableCards';
 import axiosInstance, { globalErrorHandler } from '../../utils/axios';
@@ -38,6 +38,7 @@ class PidzCompetences extends React.Component {
   state = {
     currentCompetenceIndex: 0,
     competences: [],
+    pidzCompetenceReviews: [],
   };
 
   componentDidMount() {
@@ -53,14 +54,17 @@ class PidzCompetences extends React.Component {
   determineNextStep = () => {
     const {
       navigation,
+      setPidzCompetences,
     } = this.props;
 
     const {
       currentCompetenceIndex,
       competences,
+      pidzCompetenceReviews,
     } = this.state;
 
     if (currentCompetenceIndex === competences.length - 1) {
+      setPidzCompetences(pidzCompetenceReviews);
       navigateWithOnboarding(navigation, 'DepartmentCompetences');
     } else {
       this.setState(prevState => ({
@@ -72,7 +76,6 @@ class PidzCompetences extends React.Component {
   render() {
     const {
       freelancerName,
-      setPidzCompetence,
     } = this.props;
 
     const {
@@ -95,12 +98,15 @@ class PidzCompetences extends React.Component {
       <Wrapper>
         <Formik
           onSubmit={(competence) => {
-            const data = {
+            const pidzCompetenceReview = {
               id: currentCompetenceInfo.id,
               level: competence[currentCompetenceName],
             };
 
-            setPidzCompetence(data);
+            this.setState(prevState => ({
+              pidzCompetenceReviews: [pidzCompetenceReview, ...prevState.pidzCompetenceReviews],
+            }));
+
             this.determineNextStep(competence);
           }}
         >
@@ -134,7 +140,7 @@ PidzCompetences.navigationOptions = {
 
 PidzCompetences.propTypes = {
   navigation: PropTypes.shape().isRequired,
-  setPidzCompetence: PropTypes.func.isRequired,
+  setPidzCompetences: PropTypes.func.isRequired,
   freelancerName: PropTypes.string,
 };
 
@@ -147,7 +153,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setPidzCompetence: values => dispatch(setPidzCompetence(values)),
+  setPidzCompetences: values => dispatch(setPidzCompetences(values)),
 });
 
 export default connect(

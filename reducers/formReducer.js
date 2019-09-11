@@ -1,5 +1,5 @@
 import {
-  SET_DEPARTMENT, SET_DEPARTMENT_COMPETENCES, SET_PIDZ_COMPETENCE, SET_FREELANCER,
+  SET_DEPARTMENT, SET_DEPARTMENT_COMPETENCES, SET_PIDZ_COMPETENCES, SET_FREELANCER,
   SET_OTHER_DEPARTMENT_COMPETENCES, SET_SUITABILITY, SET_FREELANCER_COMPETENCES,
 } from '../actions/types';
 
@@ -49,13 +49,10 @@ const formReducer = (state = initialState, action) => {
           clarification: action.payload.clarification,
         },
       };
-    case SET_PIDZ_COMPETENCE:
+    case SET_PIDZ_COMPETENCES:
       return {
         ...state,
-        pidzCompetences: [
-          ...state.pidzCompetences,
-          action.payload,
-        ],
+        pidzCompetences: action.payload,
       };
     case SET_FREELANCER_COMPETENCES:
       return {

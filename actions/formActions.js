@@ -1,6 +1,6 @@
 import {
-  SET_PIDZ_COMPETENCE, SET_FREELANCER, SET_SUITABILITY, SET_DEPARTMENT_COMPETENCES, SET_OTHER_DEPARTMENT_COMPETENCES,
-  SET_DEPARTMENT, SET_FREELANCER_COMPETENCES,
+  SET_PIDZ_COMPETENCES, SET_FREELANCER, SET_SUITABILITY, SET_DEPARTMENT_COMPETENCES,
+  SET_OTHER_DEPARTMENT_COMPETENCES, SET_DEPARTMENT, SET_FREELANCER_COMPETENCES,
 } from './types';
 
 export const setDepartment = data => (dispatch) => {
@@ -24,9 +24,9 @@ export const setSuitability = data => (dispatch) => {
   });
 };
 
-export const setPidzCompetence = data => (dispatch) => {
+export const setPidzCompetences = data => (dispatch) => {
   dispatch({
-    type: SET_PIDZ_COMPETENCE,
+    type: SET_PIDZ_COMPETENCES,
     payload: data,
   });
 };

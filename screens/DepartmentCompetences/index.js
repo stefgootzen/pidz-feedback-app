@@ -45,7 +45,7 @@ class DepartmentCompetences extends React.PureComponent {
       departmentId,
     } = this.props;
 
-    axiosInstance.get(`/departmentCompetences?departmentId=${departmentId}`)
+    axiosInstance.get(`/departmentCompetences?departmentId=${departmentId || 1}`)
       .then(({ data: departmentCompetences }) => {
         const initialDepartmentCompetences = departmentCompetences.map(departmentCompetence => ({
           id: departmentCompetence.id,
