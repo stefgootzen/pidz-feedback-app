@@ -5,16 +5,19 @@ import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import Button from '../../components/Button';
-import EmptyHeader from '../../components/EmptyHeader';
 import { Colors, Spacing, Typography } from '../../styles';
 import { setSuitability } from '../../actions/formActions';
 import ButtonGroup from '../../components/ButtonGroup';
 import { btnGroupYesNoToBool } from '../../utils/btnGroupYesNoToBool';
+import InputWrapper from '../../components/InputWrapper';
 import StyledTextInput from '../../components/StyledTextInput';
 import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
+import Header from '../../components/Header';
+import CloseIcon from '../../components/CloseIcon';
 
 const Wrapper = styled.View`
-  ${Spacing.sectionPadding};
+  ${Spacing.contentPadding};
+  ${Spacing.sectionTopPadding};
   background-color: ${Colors.pidzBackground};
   height: 100%;
 `;
@@ -54,24 +57,29 @@ const Suitability = (props) => {
       >
         {props => (
           <FullHeightView>
-            <InputLabel>{`Vind je ${freelancerName} geschikt om op deze afdeling te werken?`}</InputLabel>
-            <ButtonGroup
-              onPress={value => props.setFieldValue('suitable', value)}
-              selectedIndex={props.values.suitable}
-              buttons={['Ja', 'Nee']}
-              value={props.values.suitable} // TODO: check if this is needed
-              onBlur={() => props.setFieldTouched('suitable')}
-              errorMessage={
-                props.touched.suitable && props.errors.suitable ? props.errors.suitable : undefined
-              }
-            />
-            <InputLabel>Mogelijke toelichting</InputLabel>
-            <StyledTextInput
-              onChangeText={props.handleChange('clarification')}
-              onBlur={props.handleBlur('clarification')}
-              value={props.values.clarification}
-              underlineColorAndroid={Colors.darkGrey}
-            />
+            <InputWrapper>
+              <InputLabel>{`Vind je ${freelancerName} geschikt om op deze afdeling te werken?`}</InputLabel>
+              <ButtonGroup
+                onPress={value => props.setFieldValue('suitable', value)}
+                selectedIndex={props.values.suitable}
+                buttons={['Ja', 'Nee']}
+                value={props.values.suitable} // TODO: check if this is needed
+                onBlur={() => props.setFieldTouched('suitable')}
+                errorMessage={props.touched.suitable && props.errors.suitable
+                  ? props.errors.suitable
+                  : undefined}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <InputLabel>Mogelijke toelichting</InputLabel>
+              <StyledTextInput
+                onChangeText={props.handleChange('clarification')}
+                onBlur={props.handleBlur('clarification')}
+                value={props.values.clarification}
+                underlineColorAndroid={Colors.darkGrey}
+              />
+            </InputWrapper>
+
             <Button
               onPress={props.handleSubmit}
               title="Volgende"
@@ -84,7 +92,12 @@ const Suitability = (props) => {
 };
 
 Suitability.navigationOptions = {
-  header: <EmptyHeader />,
+  header: (
+    <Header
+      title="Geschiktheid"
+      icon={<CloseIcon />}
+    />
+  ),
 };
 
 Suitability.propTypes = {

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Text } from 'react-native';
 import styled from 'styled-components';
 import { Colors, Spacing, Typography } from '../../styles';
 
@@ -9,7 +10,7 @@ const Title = styled.Text`
 
 const Wrapper = styled.View`
   padding-top: 40px;
-  ${Spacing.sectionPadding};
+  ${Spacing.contentPadding};
   background-color: ${Colors.pidzBackground};
   display: flex;
   flex-direction: row;
@@ -19,6 +20,7 @@ const Wrapper = styled.View`
 
 const Header = ({ title, icon }) => (
   <Wrapper>
+    <Text> </Text>
     <Title>{ title }</Title>
     { icon }
   </Wrapper>

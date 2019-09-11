@@ -1,6 +1,5 @@
 import React from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
-import { connect } from 'formik';
 import styled from 'styled-components';
 import { Colors, Spacing, Typography } from '../../../styles';
 import RadioButton from '../../RadioButton';
@@ -30,7 +29,7 @@ const CardHeading = styled.Text`
   ${Typography.bodyText};
 `;
 
-class SelectableCard extends React.PureComponent {
+class CompetenceCard extends React.PureComponent {
   handleChange = () => {
     const {
       handleChange,
@@ -40,50 +39,36 @@ class SelectableCard extends React.PureComponent {
     handleChange(level);
   };
 
-  renderRightText = (level) => {
-    let text = '';
-    switch (level) {
-      case 0:
-        text = 'Heeft veel verbetering nodig';
-        break;
-      case 1:
-        text = 'Heeft verbetering nodig';
-        break;
-      case 2:
-        text = 'Heeft geen verbetering nodig';
-        break;
-      default:
-        return null;
-    }
-    return text;
-  };
-
   render() {
     const {
-      level,
-      selectedLevel,
+      isSelected,
       description,
+      label,
     } = this.props;
 
     return (
       <TouchableWithoutFeedback onPress={this.handleChange}>
-        <Card selected={level === selectedLevel}>
+        <Card isSelected={isSelected}>
           <Row>
             <CardHeading>
-              {this.renderRightText(level)}
+              {label}
             </CardHeading>
             <RadioButton
               color={Colors.pidzDarkBlue}
-              isSelected={level === selectedLevel}
+              isSelected={isSelected}
             />
           </Row>
-          <SmallText>
-            {description}
-          </SmallText>
+          {
+            description && (
+              <SmallText>
+                {description}
+              </SmallText>
+            )
+          }
         </Card>
       </TouchableWithoutFeedback>
     );
   }
 }
 
-export default connect(SelectableCard);
+export default CompetenceCard;

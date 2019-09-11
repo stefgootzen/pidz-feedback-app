@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withNavigation } from 'react-navigation';
 import { ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { Colors, Spacing, Typography } from '../../styles';
-import { setPidzCompetences } from '../../actions/formActions';
-import Button from '../../components/Button';
-import SelectableCards from '../../components/SelectableCards';
+import Button from '../Button';
+import CompetenceRating from '../CompetenceRating';
 import axiosInstance, { globalErrorHandler } from '../../utils/axios';
 import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
-import InputWrapper from '../../components/InputWrapper';
-import Header from '../../components/Header';
-import SignoutIcon from '../../components/SignoutIcon';
+import InputWrapper from '../InputWrapper';
 
 const Wrapper = styled.View`
   ${Spacing.contentPadding};
@@ -47,15 +45,19 @@ const CompetenceName = styled.Text`
   font-family: 'lato-bold';
 `;
 
-class PidzCompetences extends React.Component {
+class CompetenceReview extends React.Component {
   state = {
     currentCompetenceIndex: 0,
     competences: [],
-    pidzCompetenceReviews: [],
+    competenceReviews: [],
   };
 
   componentDidMount() {
-    axiosInstance.get('/pidzCompetences')
+    const {
+      apiPath,
+    } = this.props;
+
+    axiosInstance.get(apiPath)
       .then(({ data: competences }) => {
         this.setState({
           competences,
@@ -67,18 +69,19 @@ class PidzCompetences extends React.Component {
   determineNextStep = () => {
     const {
       navigation,
-      setPidzCompetences,
+      setCompetenceAction,
+      nextStep,
     } = this.props;
 
     const {
       currentCompetenceIndex,
       competences,
-      pidzCompetenceReviews,
+      competenceReviews,
     } = this.state;
 
     if (currentCompetenceIndex === competences.length - 1) {
-      setPidzCompetences(pidzCompetenceReviews);
-      navigateWithOnboarding(navigation, 'DepartmentCompetences');
+      setCompetenceAction(competenceReviews);
+      navigateWithOnboarding(navigation, nextStep);
     } else {
       this.setState(prevState => ({
         currentCompetenceIndex: prevState.currentCompetenceIndex + 1,
@@ -111,13 +114,13 @@ class PidzCompetences extends React.Component {
       <Wrapper>
         <Formik
           onSubmit={(competence) => {
-            const pidzCompetenceReview = {
+            const competenceReview = {
               id: currentCompetenceInfo.id,
               level: competence[currentCompetenceName],
             };
 
             this.setState(prevState => ({
-              pidzCompetenceReviews: [pidzCompetenceReview, ...prevState.pidzCompetenceReviews],
+              competenceReviews: [competenceReview, ...prevState.competenceReviews],
             }));
 
             this.determineNextStep(competence);
@@ -132,8 +135,7 @@ class PidzCompetences extends React.Component {
                 <CompetenceName>{currentCompetenceName}</CompetenceName>
                 <StepText>{` ${currentCompetenceIndex + 1} van ${competences.length}`}</StepText>
               </SpaceBetween>
-              <SelectableCards
-                competence={currentCompetenceInfo}
+              <CompetenceRating
                 selectedLevel={props.values[currentCompetenceName]}
                 name={currentCompetenceName}
               />
@@ -152,22 +154,14 @@ class PidzCompetences extends React.Component {
   }
 }
 
-PidzCompetences.navigationOptions = {
-  header: (
-    <Header
-      title="PIDZ competenties"
-      icon={<SignoutIcon />}
-    />
-  ),
-};
-
-PidzCompetences.propTypes = {
-  navigation: PropTypes.shape().isRequired,
-  setPidzCompetences: PropTypes.func.isRequired,
+CompetenceReview.propTypes = {
   freelancerName: PropTypes.string,
+  setCompetenceAction: PropTypes.func.isRequired,
+  apiPath: PropTypes.string.isRequired,
+  nextStep: PropTypes.string.isRequired,
 };
 
-PidzCompetences.defaultProps = {
+CompetenceReview.defaultProps = {
   freelancerName: null,
 };
 
@@ -175,11 +169,7 @@ const mapStateToProps = state => ({
   freelancerName: state.form.freelancer.name,
 });
 
-const mapDispatchToProps = dispatch => ({
-  setPidzCompetences: values => dispatch(setPidzCompetences(values)),
-});
-
-export default connect(
+export default withNavigation(connect(
   mapStateToProps,
-  mapDispatchToProps,
-)(PidzCompetences);
+  null,
+)(CompetenceReview));

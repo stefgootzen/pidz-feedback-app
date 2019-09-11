@@ -8,30 +8,32 @@ export const baseFontSize = 16;
 export const smallFontSize = 14;
 
 export const bodyText = {
+  fontFamily: 'lato-regular',
   color: Colors.pidzBody,
   fontSize: baseFontSize,
 };
 
 export const smallBodyText = {
+  fontFamily: 'lato-regular',
   color: Colors.pidzBody,
   fontSize: smallFontSize,
 };
 
 export const headerText = {
+  fontFamily: 'lato-bold',
   color: Colors.pidzBody,
-  fontSize: hugeFontSize,
-  fontWeight: 'bold',
+  fontSize: largeFontSize,
 };
 
 export const headingText = {
+  fontFamily: 'lato-regular',
   color: Colors.pidzBody,
   fontSize: largeFontSize,
-  fontWeight: '100',
 };
 
 export const inputLabel = {
+  fontFamily: 'lato-regular',
   color: Colors.pidzBody,
   fontSize: baseFontSize,
-  fontWeight: 'bold',
   opacity: 0.8,
 };

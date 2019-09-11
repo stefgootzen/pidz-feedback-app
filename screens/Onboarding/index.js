@@ -46,6 +46,7 @@ const ContentWrapper = styled.View`
 const standardText = css`
   text-align: center;
   color: ${Colors.pidzDarkBlue};
+  font-family: 'lato-regular';
 `;
 
 const DescriptionText = styled.Text`
@@ -54,7 +55,6 @@ const DescriptionText = styled.Text`
 `;
 
 const StepText = styled.Text`
-  ${Typography.inputLabel};
   ${standardText};
   margin-bottom: ${Spacing.smaller};
 `;

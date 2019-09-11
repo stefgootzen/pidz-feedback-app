@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
+import {
+  Text, ActivityIndicator, FlatList, TouchableOpacity,
+} from 'react-native';
 import styled from 'styled-components';
 import { setFreelancer } from '../../actions/formActions';
 import SignoutIcon from '../../components/SignoutIcon';
@@ -12,7 +14,8 @@ import axiosInstance, { globalErrorHandler } from '../../utils/axios';
 import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
 
 const Wrapper = styled.View`
-  ${Spacing.sectionPadding};
+  ${Spacing.contentPadding};
+  ${Spacing.sectionTopPadding};
   background-color: ${Colors.pidzBackground};
   height: 100%;
 `;
@@ -95,7 +98,7 @@ class Selection extends React.Component {
 Selection.navigationOptions = {
   header: (
     <Header
-      title="Feedback"
+      title="Selectie"
       icon={<SignoutIcon />}
     />
   ),

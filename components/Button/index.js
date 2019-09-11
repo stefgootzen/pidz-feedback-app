@@ -13,8 +13,9 @@ const Button = styled(NativeButton).attrs({
   buttonStyle: {
     backgroundColor: Colors.pidzDarkBlue,
   },
-  textStyle: {
+  titleStyle: {
     color: 'white',
+    fontFamily: 'lato-bold',
   },
 })``;
 

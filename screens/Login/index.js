@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-  ImageBackground, KeyboardAvoidingView, Picker, Text,
+  ImageBackground, KeyboardAvoidingView, Picker,
 } from 'react-native';
 import { Button as NativeButton } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -15,7 +15,7 @@ import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
 import backgroundImage from '../../assets/pidz_login_background.png';
 
 const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
-  ${Spacing.sectionPadding};
+  ${Spacing.contentPadding};
   height: 100%;
   justify-content: space-between; 
   background-color: ${Colors.pidzLightBlue};

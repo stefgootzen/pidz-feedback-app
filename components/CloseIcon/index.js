@@ -3,19 +3,15 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome/index';
 import { TouchableWithoutFeedback } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { removeJwt } from '../../actions/jwtActions';
-import { removeAuthorizationHeader } from '../../utils/axios';
 import { Colors } from '../../styles';
 
-class SignoutIcon extends React.PureComponent {
+class CloseIcon extends React.PureComponent {
   handleSignOut = async () => {
     const {
       navigation,
     } = this.props;
 
-    removeAuthorizationHeader();
-    removeJwt();
-    navigation.navigate('Login');
+    navigation.navigate('Selection');
   };
 
   render() {
@@ -28,7 +24,7 @@ class SignoutIcon extends React.PureComponent {
               { scaleX: -1 },
             ],
           }}
-          icon="sign-out-alt"
+          icon="times"
           size={20}
         />
       </TouchableWithoutFeedback>
@@ -36,8 +32,8 @@ class SignoutIcon extends React.PureComponent {
   }
 }
 
-SignoutIcon.propTypes = {
+CloseIcon.propTypes = {
   navigation: PropTypes.shape().isRequired,
 };
 
-export default withNavigation(SignoutIcon);
+export default withNavigation(CloseIcon);

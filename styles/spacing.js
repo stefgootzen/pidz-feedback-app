@@ -9,7 +9,11 @@ export const larger = 24;
 export const largest = 28;
 export const extraLarge = 50;
 
-export const sectionPadding = {
+export const contentPadding = {
   paddingLeft: small,
   paddingRight: small,
+};
+
+export const sectionTopPadding = {
+  paddingTop: base,
 };
