@@ -38,6 +38,7 @@ const FatText = styled.Text`
 class DepartmentCompetences extends React.PureComponent {
   state = {
     initialDepartmentCompetences: [],
+    buttonIsDisabled: false,
   };
 
   componentDidMount() {
@@ -60,6 +61,12 @@ class DepartmentCompetences extends React.PureComponent {
       .catch(globalErrorHandler);
   }
 
+  handleButtonAccessibility = (isDisabled) => {
+    this.setState({
+      buttonIsDisabled: isDisabled,
+    });
+  };
+
   render() {
     const {
       freelancerName,
@@ -70,6 +77,7 @@ class DepartmentCompetences extends React.PureComponent {
 
     const {
       initialDepartmentCompetences,
+      buttonIsDisabled,
     } = this.state;
 
     if (initialDepartmentCompetences.length === 0) {
@@ -131,6 +139,7 @@ class DepartmentCompetences extends React.PureComponent {
                 ))
               }
               <OtherCompetenceCards
+                handleButtonAccessibility={this.handleButtonAccessibility}
                 onChange={value => props.setFieldValue('otherDepartmentCompetences', value)}
                 name="otherDepartmentCompetences"
                 values={props.values.otherDepartmentCompetences}
@@ -138,6 +147,7 @@ class DepartmentCompetences extends React.PureComponent {
             </ScrollView>
             <ButtonWrapper>
               <Button
+                disabled={buttonIsDisabled}
                 onPress={props.handleSubmit}
                 title="Volgende"
               />

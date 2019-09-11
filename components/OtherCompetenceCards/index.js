@@ -65,6 +65,7 @@ class OtherCompetenceCards extends React.PureComponent {
     const {
       values,
       onChange,
+      handleButtonAccessibility,
     } = this.props;
 
     const {
@@ -97,7 +98,24 @@ class OtherCompetenceCards extends React.PureComponent {
       error: null,
     }));
 
+    handleButtonAccessibility(false);
     onChange(values);
+  };
+
+  enableButton = () => {
+    const {
+      handleButtonAccessibility,
+    } = this.props;
+
+    handleButtonAccessibility(false);
+  };
+
+  disableButton = () => {
+    const {
+      handleButtonAccessibility,
+    } = this.props;
+
+    handleButtonAccessibility(true);
   };
 
   removeCompetence = (id) => {
@@ -128,6 +146,8 @@ class OtherCompetenceCards extends React.PureComponent {
         </FatBodyText>
         <FlexRow>
           <StyledTextInput
+            onBlur={this.enableButton}
+            onFocus={this.disableButton}
             onChangeText={value => this.handleTextChange(value)}
             placeholder="Competentie"
             value={newCompetence}
