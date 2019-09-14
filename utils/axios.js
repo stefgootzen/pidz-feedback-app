@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { API_URL } from 'react-native-dotenv';
 import { setError } from '../actions/errorActions';
 import { store } from '../store';
 
 const config = {
-  baseURL: 'http://10.10.2.101:8080',
+  baseURL: API_URL,
   timeout: 5000,
 };
 

@@ -2,7 +2,7 @@
   "expo": {
     "name": "pidz-review",
     "slug": "pidz-review",
-    "privacy": "public",
+    "privacy": "unlisted",
     "sdkVersion": "33.0.0",
     "platforms": [
       "ios",
