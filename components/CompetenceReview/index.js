@@ -80,7 +80,15 @@ class CompetenceReview extends React.Component {
     } = this.state;
 
     if (currentCompetenceIndex === competences.length - 1) {
-      setCompetenceAction(competenceReviews);
+      const cleanedCompetenceReviews = competenceReviews
+        .map((competenceReview) => {
+          if (competenceReview.level === 'ignore') {
+            competenceReview.level = null; // eslint-disable-line
+          }
+          return competenceReview;
+        });
+
+      setCompetenceAction(cleanedCompetenceReviews);
       navigateWithOnboarding(navigation, nextStep);
     } else {
       this.setState(prevState => ({
