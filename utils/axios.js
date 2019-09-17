@@ -3,12 +3,10 @@ import { API_URL } from 'react-native-dotenv';
 import { setError } from '../actions/errorActions';
 import { store } from '../store';
 
-const config = {
+const axiosInstance = axios.create({
   baseURL: API_URL,
   timeout: 5000,
-};
-
-const axiosInstance = axios.create(config);
+});
 
 const setAuthorizationHeader = (token) => {
   axiosInstance.defaults.headers.common.Authorization = token;
