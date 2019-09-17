@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-  ImageBackground, KeyboardAvoidingView, Picker,
+  ImageBackground, KeyboardAvoidingView, Picker, Dimensions,
 } from 'react-native';
 import { Button as NativeButton } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -16,9 +16,11 @@ import backgroundImage from '../../assets/pidz_login_background.png';
 
 const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
   ${Spacing.contentPadding};
+  position: relative;
   height: 100%;
-  justify-content: space-between; 
-  background-color: ${Colors.pidzLightBlue};
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const StyledTextInput = styled.TextInput`
@@ -162,8 +164,18 @@ class Login extends React.PureComponent {
         onSubmit={this.handleSubmit}
       >
         {props => (
-          <StyledKeyboardAvoidingView behavior="padding" enabled keyboardVerticalOffset={100}>
-            <ImageBackground source={backgroundImage} style={{ justifyContent: 'center', height: '100%' }}>
+          <ImageBackground
+            source={backgroundImage}
+            style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              width: Dimensions.get('window').width,
+              height: Dimensions.get('window').height,
+              backgroundColor: Colors.pidzLightBlue,
+            }}
+          >
+            <StyledKeyboardAvoidingView behavior="height">
               <StyledView>
                 <Heading>Welkom,</Heading>
                 <SubHeading>Log in om door te gaan</SubHeading>
@@ -222,8 +234,8 @@ class Login extends React.PureComponent {
                   title="Inloggen"
                 />
               </StyledView>
-            </ImageBackground>
-          </StyledKeyboardAvoidingView>
+            </StyledKeyboardAvoidingView>
+          </ImageBackground>
         )}
       </Formik>
     );
