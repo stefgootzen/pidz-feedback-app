@@ -21,13 +21,6 @@ class SelectableCards extends React.PureComponent {
       selectedLevel,
     } = this.props;
 
-    let levelToCompare;
-    if (selectedLevel === undefined) {
-      levelToCompare = 'ignore';
-    } else {
-      levelToCompare = selectedLevel;
-    }
-
     return (
       <View>
         {
@@ -35,7 +28,7 @@ class SelectableCards extends React.PureComponent {
             <CompetenceCard
               key={label}
               level={values[index]}
-              isSelected={levelToCompare === values[index]}
+              isSelected={selectedLevel === values[index]}
               label={label}
               handleChange={this.handleChange}
             />
