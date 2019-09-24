@@ -10,10 +10,10 @@ import { setSuitability } from '../../actions/formActions';
 import ButtonGroup from '../../components/ButtonGroup';
 import { btnGroupYesNoToBool } from '../../utils/btnGroupYesNoToBool';
 import InputWrapper from '../../components/InputWrapper';
-import StyledTextInput from '../../components/StyledTextInput';
 import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
 import Header from '../../components/Header';
 import CloseIcon from '../../components/CloseIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 const Wrapper = styled.View`
   ${Spacing.contentPadding};
@@ -22,12 +22,27 @@ const Wrapper = styled.View`
   height: 100%;
 `;
 
+const InformationWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  border-width: 1px;
+  border-color: ${Colors.darkGrey};
+  padding: ${Spacing.small}px;
+  border-radius: 3px;
+`;
+
 const FullHeightView = styled.View`
   height: 100%;
 `;
 
 const InputLabel = styled(Text)`
   ${Typography.inputLabel};
+`;
+
+const InformationText = styled(Text)`
+  ${Typography.smallBodyText};
+  opacity: 0.7;
+  padding-left: ${Spacing.smaller}px;
 `;
 
 const Suitability = (props) => {
@@ -40,18 +55,11 @@ const Suitability = (props) => {
   return (
     <Wrapper>
       <Formik
-        initialValues={{ clarification: '', suitable: 0 }}
+        initialValues={{ suitable: 0 }}
         onSubmit={(values) => {
           const isSuitable = btnGroupYesNoToBool(values.suitable);
 
-          const clarification = values.clarification.length === 0 ? null : values.clarification;
-
-          const suitableForDepartment = {
-            isSuitable,
-            clarification,
-          };
-
-          setSuitability(suitableForDepartment);
+          setSuitability(isSuitable);
           navigateWithOnboarding(navigation, 'PidzCompetences');
         }}
       >
@@ -63,22 +71,25 @@ const Suitability = (props) => {
                 onPress={value => props.setFieldValue('suitable', value)}
                 selectedIndex={props.values.suitable}
                 buttons={['Ja', 'Nee']}
-                value={props.values.suitable} // TODO: check if this is needed
+                value={props.values.suitable}
                 onBlur={() => props.setFieldTouched('suitable')}
                 errorMessage={props.touched.suitable && props.errors.suitable
                   ? props.errors.suitable
                   : undefined}
               />
             </InputWrapper>
-            <InputWrapper>
-              <InputLabel>Mogelijke toelichting</InputLabel>
-              <StyledTextInput
-                onChangeText={props.handleChange('clarification')}
-                onBlur={props.handleBlur('clarification')}
-                value={props.values.clarification}
-                underlineColorAndroid={Colors.darkGrey}
+            <InformationWrapper>
+              <FontAwesomeIcon
+                style={{
+                  opacity: 0.6,
+                }}
+                size={20}
+                icon="info-circle"
               />
-            </InputWrapper>
+              <InformationText>
+                Ruimte voor aanvulling volgt
+              </InformationText>
+            </InformationWrapper>
 
             <Button
               onPress={props.handleSubmit}

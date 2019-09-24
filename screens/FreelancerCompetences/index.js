@@ -16,7 +16,7 @@ const FreelancerCompetences = (props) => {
     <CompetenceReview
       setCompetenceAction={setFreelancerCompetences}
       apiPath={`/freelancerCompetences?freelancerId=${freelancerId}`}
-      nextStep="Closing"
+      nextStep="Remarks"
     />
   );
 };

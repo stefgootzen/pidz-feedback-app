@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faSmile, faMeh, faFrown, faTrash, faAngleRight, faSignOutAlt, faTimes,
+  faInfoCircle, faSmile, faMeh, faFrown, faTrash, faAngleRight, faSignOutAlt, faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
@@ -15,6 +15,7 @@ import ErrorShower from './components/ErrorShower';
 import OtherDepartmentCompetences from './screens/OtherDepartmentCompetences';
 import Selection from './screens/Selection';
 import Closing from './screens/Closing';
+import Remarks from './screens/Remarks';
 import DepartmentCompetences from './screens/DepartmentCompetences';
 import Onboarding from './screens/Onboarding';
 import InitialLoadingScreen from './screens/InitialLoadingScreen';
@@ -23,7 +24,7 @@ import FreelancerCompetences from './screens/FreelancerCompetences';
 import PidzCompetences from './screens/PidzCompetences';
 import fromRight from './utils/transitionConfig';
 
-library.add(faSmile, faMeh, faFrown, faTrash, faAngleRight, faSignOutAlt, faTimes);
+library.add(faInfoCircle, faSmile, faMeh, faFrown, faTrash, faAngleRight, faSignOutAlt, faTimes);
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -32,9 +33,6 @@ const AuthStack = createStackNavigator({
 });
 
 const MainStack = createStackNavigator({
-  OtherDepartmentCompetences: {
-    screen: OtherDepartmentCompetences,
-  },
   Selection: {
     screen: Selection,
   },
@@ -47,8 +45,14 @@ const MainStack = createStackNavigator({
   DepartmentCompetences: {
     screen: DepartmentCompetences,
   },
+  OtherDepartmentCompetences: {
+    screen: OtherDepartmentCompetences,
+  },
   FreelancerCompetences: {
     screen: FreelancerCompetences,
+  },
+  Remarks: {
+    screen: Remarks,
   },
   Closing: {
     screen: Closing,
@@ -64,7 +68,7 @@ const Routes = createSwitchNavigator({
   all: MainStack,
 },
 {
-  initialRouteName: 'all',
+  initialRouteName: 'initialLoading',
   transitionConfig: () => fromRight(),
 });
 

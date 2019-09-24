@@ -1,6 +1,6 @@
 import {
   SET_DEPARTMENT, SET_DEPARTMENT_COMPETENCES, SET_PIDZ_COMPETENCES, SET_FREELANCER,
-  SET_OTHER_DEPARTMENT_COMPETENCES, SET_SUITABILITY, SET_FREELANCER_COMPETENCES,
+  SET_OTHER_DEPARTMENT_COMPETENCES, SET_SUITABILITY, SET_FREELANCER_COMPETENCES, SET_REMARKS,
 } from '../actions/types';
 
 const initialState = {
@@ -11,14 +11,15 @@ const initialState = {
     id: null,
     name: null,
   },
-  suitableForDepartment: {
-    isSuitable: null,
-    clarification: null,
-  },
+  isSuitableForDepartment: null,
   pidzCompetences: null,
   freelancerCompetences: null,
   departmentCompetences: null,
   otherDepartmentCompetence: null,
+  remark: {
+    message: null,
+    recipients: null,
+  },
 };
 
 const formReducer = (state = initialState, action) => {
@@ -43,11 +44,7 @@ const formReducer = (state = initialState, action) => {
     case SET_SUITABILITY:
       return {
         ...state,
-        suitableForDepartment: {
-          ...state.suitability,
-          isSuitable: action.payload.isSuitable,
-          clarification: action.payload.clarification,
-        },
+        isSuitableForDepartment: action.payload,
       };
     case SET_PIDZ_COMPETENCES:
       return {
@@ -68,6 +65,14 @@ const formReducer = (state = initialState, action) => {
       return {
         ...state,
         otherDepartmentCompetences: action.payload,
+      };
+    case SET_REMARKS:
+      return {
+        ...state,
+        remark: {
+          message: action.payload.message,
+          recipients: action.payload.recipients,
+        },
       };
     default:
       return state;
