@@ -95,6 +95,7 @@ class OtherDepartmentCompetences extends React.Component {
         <Formik
           initialValues={{
             otherDepartmentCompetenceName: '',
+            otherDepartmentCompetenceLevel: null,
           }}
           onSubmit={(values) => {
             const competenceReview = [{
@@ -152,7 +153,7 @@ class OtherDepartmentCompetences extends React.Component {
                   title="Volgende"
                   disabled={
                     !props.values.otherDepartmentCompetenceName
-                    || !props.values.otherDepartmentCompetenceLevel
+                    || props.values.otherDepartmentCompetenceLevel === null
                   }
                 />
               </NavigationContainer>
