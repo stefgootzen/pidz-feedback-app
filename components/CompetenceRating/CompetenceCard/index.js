@@ -10,7 +10,7 @@ const determineOpacity = (isSelected, isDisabled) => {
     opacity = 1;
   }
   if (isDisabled) {
-    opacity = 0.2;
+    opacity = 0.1;
   }
   return opacity;
 };

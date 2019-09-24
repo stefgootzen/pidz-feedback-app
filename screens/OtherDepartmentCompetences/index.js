@@ -115,24 +115,26 @@ class OtherDepartmentCompetences extends React.Component {
               <InputWrapper moreMargin>
                 <InputLabel>{`Is er nog een andere competentie waarop je ${freelancerName} feedback wil geven?`}</InputLabel>
               </InputWrapper>
-              <SpaceBetween>
-                <StyledTextInput
-                  placeholder="Competentie"
-                  onChangeText={props.handleChange('otherDepartmentCompetenceName')}
-                  value={props.values.otherDepartmentCompetenceName}
-                  underlineColorAndroid={Colors.darkGrey}
-                />
-                <TouchableWithoutFeedback onPress={() => this.resetNameAndLevel(props)}>
-                  <FontAwesomeIcon
-                    style={{
-                      opacity: props.values.otherDepartmentCompetenceName.length === 0 ? 0.3 : 1,
-                      marginLeft: 12,
-                    }}
-                    size={20}
-                    icon="trash"
+              <InputWrapper>
+                <InputLabel>Competentie</InputLabel>
+                <SpaceBetween>
+                  <StyledTextInput
+                    onChangeText={props.handleChange('otherDepartmentCompetenceName')}
+                    value={props.values.otherDepartmentCompetenceName}
+                    underlineColorAndroid={Colors.darkGrey}
                   />
-                </TouchableWithoutFeedback>
-              </SpaceBetween>
+                  <TouchableWithoutFeedback onPress={() => this.resetNameAndLevel(props)}>
+                    <FontAwesomeIcon
+                      style={{
+                        opacity: props.values.otherDepartmentCompetenceName.length === 0 ? 0.3 : 1,
+                        marginLeft: 12,
+                      }}
+                      size={20}
+                      icon="trash"
+                    />
+                  </TouchableWithoutFeedback>
+                </SpaceBetween>
+              </InputWrapper>
 
               <CompetenceRating
                 values={[0, 1, 2]}
