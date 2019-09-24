@@ -3,9 +3,6 @@ import { View } from 'react-native';
 import { connect } from 'formik';
 import CompetenceCard from './CompetenceCard';
 
-const values = [0, 1, 2, 'ignore'];
-const labels = ['Heeft veel verbetering nodig', 'Heeft verbetering nodig', 'Heeft geen verbetering nodig', 'Niet van toepassing'];
-
 class SelectableCards extends React.PureComponent {
   handleChange = (value) => {
     const {
@@ -19,6 +16,9 @@ class SelectableCards extends React.PureComponent {
   render() {
     const {
       selectedLevel,
+      labels,
+      values,
+      isDisabled,
     } = this.props;
 
     return (
@@ -29,6 +29,7 @@ class SelectableCards extends React.PureComponent {
               key={label}
               level={values[index]}
               isSelected={selectedLevel === values[index]}
+              isDisabled={isDisabled}
               label={label}
               handleChange={this.handleChange}
             />

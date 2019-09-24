@@ -12,6 +12,7 @@ import { PersistGate } from 'redux-persist/es/integration/react';
 import { store, persistor } from './store';
 import Suitability from './screens/Suitability';
 import ErrorShower from './components/ErrorShower';
+import OtherDepartmentCompetences from './screens/OtherDepartmentCompetences';
 import Selection from './screens/Selection';
 import Closing from './screens/Closing';
 import DepartmentCompetences from './screens/DepartmentCompetences';
@@ -31,6 +32,9 @@ const AuthStack = createStackNavigator({
 });
 
 const MainStack = createStackNavigator({
+  OtherDepartmentCompetences: {
+    screen: OtherDepartmentCompetences,
+  },
   Selection: {
     screen: Selection,
   },
@@ -60,7 +64,7 @@ const Routes = createSwitchNavigator({
   all: MainStack,
 },
 {
-  initialRouteName: 'initialLoading',
+  initialRouteName: 'all',
   transitionConfig: () => fromRight(),
 });
 

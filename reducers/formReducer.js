@@ -15,10 +15,10 @@ const initialState = {
     isSuitable: null,
     clarification: null,
   },
-  pidzCompetences: [],
+  pidzCompetences: null,
   freelancerCompetences: null,
   departmentCompetences: null,
-  otherDepartmentCompetences: null,
+  otherDepartmentCompetence: null,
 };
 
 const formReducer = (state = initialState, action) => {

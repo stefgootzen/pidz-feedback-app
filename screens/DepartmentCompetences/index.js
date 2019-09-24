@@ -16,7 +16,7 @@ const DepartmentCompetences = (props) => {
     <CompetenceReview
       setCompetenceAction={setDepartmentCompetences}
       apiPath={`/departmentCompetences?departmentId=${departmentId}`}
-      nextStep="FreelancerCompetences"
+      nextStep="OtherDepartmentCompetences"
     />
   );
 };

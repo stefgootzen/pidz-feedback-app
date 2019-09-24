@@ -4,11 +4,22 @@ import styled from 'styled-components';
 import { Colors, Spacing, Typography } from '../../../styles';
 import RadioButton from '../../RadioButton';
 
+const determineOpacity = (isSelected, isDisabled) => {
+  let opacity = 0.8;
+  if (isSelected) {
+    opacity = 1;
+  }
+  if (isDisabled) {
+    opacity = 0.2;
+  }
+  return opacity;
+};
+
 const Card = styled.View`
   background-color: white;
   border: 1px;
-  opacity: ${props => (props.selected ? 1 : 0.8)};
-  border-color: ${props => (props.selected ? Colors.pidzDarkBlue : 'white')};
+  opacity: ${props => determineOpacity(props.isSelected, props.isDisabled)};
+  border-color: ${props => (props.isSelected ? Colors.pidzDarkBlue : 'white')};
   padding: ${Spacing.small}px;
   margin-bottom: ${Spacing.small}px;
 `;
@@ -34,13 +45,19 @@ class CompetenceCard extends React.PureComponent {
     const {
       handleChange,
       level,
+      isDisabled,
     } = this.props;
+
+    if (isDisabled) {
+      return;
+    }
 
     handleChange(level);
   };
 
   render() {
     const {
+      isDisabled,
       isSelected,
       description,
       label,
@@ -48,7 +65,10 @@ class CompetenceCard extends React.PureComponent {
 
     return (
       <TouchableWithoutFeedback onPress={this.handleChange}>
-        <Card isSelected={isSelected}>
+        <Card
+          isSelected={isSelected}
+          isDisabled={isDisabled}
+        >
           <Row>
             <CardHeading>
               {label}

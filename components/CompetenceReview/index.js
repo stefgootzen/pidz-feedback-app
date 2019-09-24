@@ -144,6 +144,8 @@ class CompetenceReview extends React.Component {
                 <StepText>{` ${currentCompetenceIndex + 1} van ${competences.length}`}</StepText>
               </SpaceBetween>
               <CompetenceRating
+                values={[0, 1, 2, 'ignore']}
+                labels={['Heeft veel verbetering nodig', 'Heeft verbetering nodig', 'Heeft geen verbetering nodig', 'Niet van toepassing']}
                 selectedLevel={props.values[currentCompetenceName]}
                 name={currentCompetenceName}
               />
