@@ -31,7 +31,7 @@ FreelancerCompetences.navigationOptions = {
 };
 
 const mapStateToProps = state => ({
-  freelancerId: state.form.department.id,
+  freelancerId: state.form.freelancer.id,
 });
 
 const mapDispatchToProps = dispatch => ({
