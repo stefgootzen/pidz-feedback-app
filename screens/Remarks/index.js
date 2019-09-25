@@ -65,6 +65,14 @@ const Button = styled(NativeButton).attrs({
 const buttonGroupValues = ['PIDZ', 'Planner', 'ZZP\'er'];
 
 class Remarks extends React.Component {
+  navigateToNextRoute = () => {
+    const {
+      navigation,
+    } = this.props;
+
+    navigateWithOnboarding(navigation, 'Closing');
+  };
+
   render() {
     const {
       freelancerName,
@@ -84,12 +92,11 @@ class Remarks extends React.Component {
             };
 
             const {
-              navigation,
               setRemarks,
             } = this.props;
 
             setRemarks(remark);
-            navigateWithOnboarding(navigation, 'Closing');
+            this.navigateToNextRoute();
           }}
         >
           {props => (

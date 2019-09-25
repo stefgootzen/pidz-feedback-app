@@ -83,7 +83,7 @@ class OtherDepartmentCompetences extends React.Component {
     } = this.props;
 
     navigateWithOnboarding(navigation, 'FreelancerCompetences');
-  }
+  };
 
   render() {
     const {

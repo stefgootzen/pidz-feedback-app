@@ -16,10 +16,7 @@ const initialState = {
   freelancerCompetences: null,
   departmentCompetences: null,
   otherDepartmentCompetence: null,
-  remark: {
-    message: null,
-    recipients: null,
-  },
+  remark: null,
 };
 
 const formReducer = (state = initialState, action) => {
@@ -69,10 +66,7 @@ const formReducer = (state = initialState, action) => {
     case SET_REMARKS:
       return {
         ...state,
-        remark: {
-          message: action.payload.message,
-          recipients: action.payload.recipients,
-        },
+        remark: action.payload,
       };
     default:
       return state;
