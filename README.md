@@ -5,7 +5,7 @@ Deze repository is onderdeel van het afstudeerproject _Op weg naar de beste matc
 ## Eisen
 
 - [Expo](https://facebook.github.io/react-native/docs/getting-started) geïnstalleerd  
-- pidz-feedback-api opgezet
+- [pidz-feedback-api](https://github.com/stefgootzen/pidz-feedback-app) opgezet
 
 ## Aan de slag  
 
