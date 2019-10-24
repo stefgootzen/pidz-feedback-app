@@ -8,6 +8,7 @@ const axiosInstance = axios.create({
   timeout: 5000,
 });
 
+console.log(axiosInstance);
 const setAuthorizationHeader = (token) => {
   axiosInstance.defaults.headers.common.Authorization = token;
 };

@@ -1,83 +1,60 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import {
-  ImageBackground, KeyboardAvoidingView, Picker, Dimensions,
-} from 'react-native';
-import { Button as NativeButton } from 'react-native-elements';
+import { Picker } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import { Colors, Spacing, Typography } from '../../styles';
+import { ThunkDispatch } from 'redux-thunk'; //eslint-disable-line
+import {
+  ErrorText, FatBodyText, Heading, StyledButton, StyledKeyboardAvoidingView, StyledPicker,
+  StyledTextInput, StyledView, SubHeading, StyledImageBackground,
+} from './styles';
+import { Colors } from '../../styles';
 import { setJwt } from '../../actions/jwtActions';
 import { setDepartment } from '../../actions/formActions';
 import axiosInstance, { globalErrorHandler, setAuthorizationHeader } from '../../utils/axios';
 import navigateWithOnboarding from '../../utils/navigateWithOnboarding';
 import backgroundImage from '../../assets/pidz_login_background.png';
 
-const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView)`
-  ${Spacing.contentPadding};
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
+interface Organisation {
+  id: number,
+  name: string,
+}
 
-const StyledTextInput = styled.TextInput`
-  padding: ${Spacing.smallest}px;
-`;
+interface Department {
+  id: number,
+  name: string,
+}
 
-const StyledPicker = styled.Picker`
-  width: 100%;
-  height: 30px;
-`;
+interface State {
+  organisations: [],
+  departments: [],
+  error: null,
+}
 
-const ErrorText = styled.Text`
-  color: ${Colors.pidzRed};
-`;
+interface OwnProps {
+  setDepartment(department: any): any,
+  setJwt(jwt: string): any,
+  navigation: any,
+}
 
-const FatBodyText = styled.Text`
-  ${Typography.inputLabel};
-  color: ${Colors.pidzDarkBlue};
-  margin-top: ${Spacing.small};
-`;
+interface DispatchProps {
+  setDepartment: (values: Department) => void,
+  setJwt: (values: string) => void,
+}
 
-const StyledView = styled.View`
-  padding: ${Spacing.small}px;
-  border-radius: 5px;
-  background-color: white;
-  display: flex;
-`;
+type Props = OwnProps & DispatchProps;
 
-const Heading = styled.Text`
-  ${Typography.headerText};
-  color: ${Colors.pidzDarkBlue};
-`;
+interface FormValues {
+  department: Department | null,
+  password: string,
+  organisation: Organisation | null,
+}
 
-const SubHeading = styled.Text`
-  ${Typography.headingText};
-  font-weight: bold;
-  margin-bottom: ${Spacing.small};
-  color: ${Colors.pidzDarkBlue};
-`;
+class Login extends React.PureComponent<Props, State> {
+  static navigationOptions = () => ({
+    header: null,
+  });
 
-const StyledButton = styled(NativeButton).attrs({
-  disabledStyle: {
-    opacity: 0.5,
-  },
-  buttonStyle: {
-    backgroundColor: Colors.pidzDarkBlue,
-  },
-  containerStyle: {
-    marginTop: Spacing.small,
-  },
-  textStyle: {
-    color: 'white',
-  },
-})``;
-
-class Login extends React.PureComponent {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       organisations: [],
@@ -96,7 +73,7 @@ class Login extends React.PureComponent {
       .catch(globalErrorHandler);
   }
 
-  handleSubmit = (values) => {
+  handleSubmit = (values: FormValues) => {
     const {
       setDepartment,
       setJwt,
@@ -119,10 +96,6 @@ class Login extends React.PureComponent {
           error: null,
         });
 
-        this.setState({
-          error: null,
-        });
-
         setDepartment(departmentId);
         setJwt(jwt);
         setAuthorizationHeader(jwt);
@@ -135,7 +108,7 @@ class Login extends React.PureComponent {
       });
   };
 
-  handleOrganisationChange = async (value) => {
+  handleOrganisationChange = async (value: number) => {
     try {
       const {
         data: { Departments: departments },
@@ -160,19 +133,16 @@ class Login extends React.PureComponent {
       <Formik
         initialValues={{
           password: '',
+          department: null,
+          organisation: null,
         }}
         onSubmit={this.handleSubmit}
       >
         {props => (
-          <ImageBackground
+          <StyledImageBackground
             source={backgroundImage}
             style={{
-              position: 'absolute',
-              left: 0,
-              top: 0,
-              width: Dimensions.get('window').width,
-              height: Dimensions.get('window').height,
-              backgroundColor: Colors.pidzLightBlue,
+
             }}
           >
             <StyledKeyboardAvoidingView behavior="height">
@@ -182,13 +152,13 @@ class Login extends React.PureComponent {
                 <FatBodyText>Organisatie</FatBodyText>
                 <StyledPicker
                   selectedValue={props.values.organisation}
-                  onValueChange={((value) => {
+                  onValueChange={((value: number) => {
                     this.handleOrganisationChange(value);
                     props.setFieldValue('organisation', value);
                   })}
                 >
                   {
-                    organisations.map(organisation => (
+                    organisations.map((organisation: Organisation) => (
                       <Picker.Item
                         color={Colors.pidzDarkBlue}
                         key={organisation.id}
@@ -200,15 +170,17 @@ class Login extends React.PureComponent {
                 </StyledPicker>
 
                 <FatBodyText>Afdeling</FatBodyText>
+                {/*
+                  // @ts-ignore */}
                 <StyledPicker
                   name="department"
                   selectedValue={props.values.department}
-                  onValueChange={((value) => {
+                  onValueChange={((value: number) => {
                     props.setFieldValue('department', value);
                   })}
                 >
                   {
-                    departments.map(department => (
+                    departments.map((department: Department) => (
                       <Picker.Item
                         color={Colors.pidzDarkBlue}
                         key={department.id}
@@ -235,24 +207,16 @@ class Login extends React.PureComponent {
                 />
               </StyledView>
             </StyledKeyboardAvoidingView>
-          </ImageBackground>
+          </StyledImageBackground>
         )}
       </Formik>
     );
   }
 }
 
-Login.navigationOptions = {
-  header: null,
-};
-
-Login.propTypes = {
-  navigation: PropTypes.shape().isRequired,
-};
-
-const mapDispatchToProps = dispatch => ({
-  setJwt: values => dispatch(setJwt(values)),
-  setDepartment: values => dispatch(setDepartment(values)),
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => ({
+  setJwt: (values: string) => dispatch(setJwt(values)),
+  setDepartment: (values: Department) => dispatch(setDepartment(values)),
 });
 
 export default connect(

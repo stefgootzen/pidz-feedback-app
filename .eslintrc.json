@@ -3,7 +3,7 @@
     "browser": true,
     "es6": true
   },
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb"
   ],
@@ -19,19 +19,13 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "@typescript-eslint"
   ],
   "rules": {
+    "import/no-unresolved": 0,
     "no-shadow": "off",
     "react/prop-types": "off",
-    "react/jsx-filename-extension": [
-      "error",
-      {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
-    ]
+    "react/jsx-filename-extension": 0
   }
 }
